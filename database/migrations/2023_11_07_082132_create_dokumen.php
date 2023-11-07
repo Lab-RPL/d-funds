@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('id_user');
-            $table->string('username');
-            $table->string('password');
-            $table->enum('user_type', ['admin', 'pejabat', 'user', 'kour', 'pelaksana'])->default('user');
-            $table->rememberToken();
+        Schema::create('dokumen', function (Blueprint $table) {
+            $table->bigIncrements('id_dokumen');
+            $table->string('nama_dokumen');
+            $table->string('nama_file');
+            $table->unsignedBigInteger('id_pengajuan');
             $table->boolean('IsDelete')->default(0);
+            $table->foreign('id_pengajuan')->references('id_pengajuan')->on('pengajuan');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('dokumen');
     }
 };
