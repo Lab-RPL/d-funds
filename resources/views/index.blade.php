@@ -7,6 +7,14 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
 
+                          <div class="col-lg-12 col-md-3">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="card-title">Selamat Datang</h2>
+                                    <!-- Card content here -->
+                                </div>
+                            </div>
+                        </div>
                             <!-- Card pertama - Profit -->
                             <div class="col-lg-3 col-md-3">
                                 <div class="card mb-4">
