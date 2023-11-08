@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('kategori', function (Blueprint $table) {
             $table->bigIncrements('id_kategori');
+            $table->string('kategori');
             $table->string('obj_pembayaran');
             $table->text('deskripsi')->nullable();
             $table->text('keterangan')->nullable();
