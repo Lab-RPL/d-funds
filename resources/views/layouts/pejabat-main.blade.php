@@ -50,9 +50,9 @@
   </head>
 
   <body>
-    @include('partials.adminbar')
+    @include('partials.pejabatbar')
 
-    @yield('content')
+    @yield('content-pejabat')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

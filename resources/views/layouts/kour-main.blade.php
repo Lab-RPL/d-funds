@@ -50,9 +50,9 @@
   </head>
 
   <body>
-    @include('partials.adminbar')
+    @include('partials.kourbar')
 
-    @yield('content')
+    @yield('content-kour')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

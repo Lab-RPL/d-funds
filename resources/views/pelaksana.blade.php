@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('content')
+@extends('layouts.pelaksana-main')
+@section('content-pelaksana')
 
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -16,7 +16,7 @@
                               <div class="card-body">
                                 <div class="d-flex align-items-center">
                                   <div class="flex-grow-1">
-                                    <h2 class="card-title">Selamat Datang di DFUNDS</h2>
+                                    <h2 class="card-title">Tampilan sementara Pelaksana DFUNDS</h2>
                                   </div>
                                   <img src="../assets/img/illustrations/man-with-laptop-light.png" alt="Welcome Image" width="160"> 
                                 </div>
@@ -133,34 +133,6 @@
                               <div class="card">
                                  <div class="card-body">                                            <!-- Tombol Tambah -->
                                     <button type="submit" class="btn btn-primary mb-3">Tambah</button>
-                                    
-                                        <!-- Formulir dengan Tabel -->
-                                        <form>
-                                            <table id="tabelData" class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Tentang</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Kategori</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Persetujuan Unit</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Opsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>                                                            
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                        <a href="#" class="btn btn-primary"></a>
-                                                        <a href="#" class="btn btn-warning"></a>
-                                                        <a class="delete-btn btn btn-danger" href="#"></a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-
-                                        </form>
                                  </div>
                               </div>
                            </div>
