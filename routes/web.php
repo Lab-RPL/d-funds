@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard',[AdminController::class,"index"])->name('admin.index');
 Route::post('/dashboard',[AdminController::class,"store"])->name('admin.store');
 Route::get('/dashboard/{id_user}',[AdminController::class,'destroy'])->name('admin.destroy');
+Route::get('/dashboard/edit/{id_user}',[AdminController::class,'edit'])->name('admin.edit');
+Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->name('admin.update');
+
 // Route::get('/dashboard/edit/{id_user}', [AdminController::class, 'edit'])->name('admin.edit');
 // Route::put('/dashboard/{id}', [AdminController::class, 'update'])->name('admin.update');
 

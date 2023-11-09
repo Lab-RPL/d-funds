@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
 
-                                        {{-- Edit Form --}}
+                                        {{-- Edit Form
                                         <div class="modal fade" id="editModal" tabindex="-1"
                                             aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -260,7 +260,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
 
                                         <!-- Formulir dengan Tabel -->
@@ -287,8 +287,7 @@
                                                         <td>{{ $user->user_type }}</td>
                                                         <td class="text-center">
                                                             @if($user->user_type != 'admin')
-                                                                <a href="" class="btn btn-warning edit-btn"
-                                                                   data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
+                                                                <a href="{{ Route('admin.edit',$user->id_user) }}" class="btn btn-warning">Edit</a>
                                                                 <a class="delete-btn btn btn-danger"
                                                                    href="{{ route('admin.destroy', $user->id_user) }}">Hapus</a>
                                                             @endif

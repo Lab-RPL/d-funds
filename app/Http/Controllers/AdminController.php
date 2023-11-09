@@ -42,6 +42,33 @@ public function store(Request $request)
     return redirect()->back()->with('message', 'Data Berhasil Ditambahkan');
 }
 
+public function edit($id)
+{
+    $user = admin::findOrFail($id);
+    return view('admin.edit', compact('user'));
+}
+
+public function update(Request $request, $id)
+{
+    $user = admin::findOrFail($id);
+    
+    $validated = $request->validate([
+        'username' => 'required|max:255',
+        'password' => 'required',
+        'user_type' => 'required',
+    ]);
+
+    $user->username = $validated['username'];
+    $user->password = bcrypt($validated['password']);  //encrypt the password before saving it
+    $user->user_type = $validated['user_type'];
+
+    $user->save();
+
+    return redirect()->route('admin.index')->with('message', 'User Berhasil Di Update');
+}
+
+
+
 // public function edit($id)
 // {
 //     $user = Admin::findOrFail($id); // findOrFail akan menghasilkan error jika user tidak ditemukan
