@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('content')
-
-
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -11,27 +9,28 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
 
-                          <div class="col-lg-12 col-md-12">
-                            <div class="card mb-3">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                  <div class="flex-grow-1">
-                                    <h2 class="card-title">Selamat Datang di DFUNDS</h2>
-                                  </div>
-                                  <img src="../assets/img/illustrations/man-with-laptop-light.png" alt="Welcome Image" width="160"> 
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <h2 class="card-title">Selamat Datang di DFUNDS</h2>
+                                            </div>
+                                            <img src="../assets/img/illustrations/man-with-laptop-light.png"
+                                                alt="Welcome Image" width="160">
+                                        </div>
+                                        <!-- Card content here -->
+                                    </div>
                                 </div>
-                                <!-- Card content here -->
-                              </div>
                             </div>
-                          </div>
                             <!-- Card pertama - Profit -->
                             <div class="col-lg-3 col-md-3">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <div class="card-title d-flex align-items-start justify-content-between">
                                             <div class="avatar flex-shrink-0">
-                                                <img src="../assets/img/icons/unicons/chart-success.png"
-                                                    alt="chart success" class="rounded" />
+                                                <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
+                                                    class="rounded" />
                                             </div>
                                             <div class="dropdown">
                                                 <button class="btn p-0" type="button" id="cardOpt3"
@@ -52,29 +51,29 @@
 
                             <!-- Card kedua - Sales -->
                             <div class="col-lg-3 col-md-3">
-                              <div class="card mb-4">
-                                  <div class="card-body">
-                                      <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                              <img src="../assets/img/icons/unicons/wallet-info.png"
-                                                  alt="chart success" class="rounded" />
-                                          </div>
-                                          <div class="dropdown">
-                                              <button class="btn p-0" type="button" id="cardOpt3"
-                                                  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                              </button>
-                                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                  <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <span class="fw-medium d-block mb-1">Sales</span>
-                                      <h3 class="card-title mb-2">$7,628</h3>
-                                  </div>
-                              </div>
-                          </div>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/wallet-info.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-1">Sales</span>
+                                        <h3 class="card-title mb-2">$7,628</h3>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Card ketiga - Payments -->
                             <div class="col-lg-3 col-md-3">
@@ -127,44 +126,48 @@
                                     </div>
                                 </div>
                             </div>
-                           
-                           <!-- Tabel Data -->
-                           <div class="col-lg-12 col-md-12">
-                              <div class="card">
-                                 <div class="card-body">                                            <!-- Tombol Tambah -->
-                                    <button type="submit" class="btn btn-primary mb-3">Tambah</button>
-                                    
+
+                            <!-- Tabel Data -->
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-body"> <!-- Tombol Tambah -->
+                                        <button type="submit" class="btn btn-primary mb-3">Tambah</button>
+
                                         <!-- Formulir dengan Tabel -->
                                         <form>
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Tentang</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Kategori</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Persetujuan Unit</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Opsi</th>
+                                                        <th style="background-color: #A0E9FF;" class="text-center">
+                                                            Username</th>
+                                                        <th style="background-color: #A0E9FF;" class="text-center">Role
+                                                        </th>
+                                                        <th style="background-color: #A0E9FF;" class="text-center">Opsi
+                                                        </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>                                                            
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                        <a href="#" class="btn btn-primary"></a>
-                                                        <a href="#" class="btn btn-warning"></a>
-                                                        <a class="delete-btn btn btn-danger" href="#"></a>
-                                                    </td>
-                                                </tr>
+                                                <tbody>
+                                                    @foreach ($data as $user)
+                                                        <tr>
+                                                            <td>{{ $user->username }}</td>
+                                                            <td>{{ $user->user_type }}</td>
+                                                            <td class="text-center">
+                                                                <a href="#" class="btn btn-warning">Edit</a>
+                                                                <a class="delete-btn btn btn-danger"
+                                                                    href="#">Hapus</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+
                                                 </tbody>
                                             </table>
 
 
                                         </form>
-                                 </div>
-                              </div>
-                           </div>
-                           
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
                     </div>
@@ -174,7 +177,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
@@ -187,5 +190,4 @@
             pageLength: 5 // Menampilkan 5 data per halaman
         });
     </script>
- 
 @endsection
