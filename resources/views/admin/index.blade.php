@@ -189,7 +189,6 @@
                                                                     name="user_type" required>
                                                                     <option selected disabled hidden value="">
                                                                         Choose...</option>
-                                                                    <option value="admin">Admin</option>
                                                                     <option value="kour">Kour</option>
                                                                     <option value="pejabat">Pejabat</option>
                                                                     <option value="user">User</option>
@@ -244,7 +243,6 @@
                                                                     name="user_type" required>
                                                                     <option selected disabled hidden value="">
                                                                         Choose...</option>
-                                                                    <option value="admin">Admin</option>
                                                                     <option value="kour">Kour</option>
                                                                     <option value="pejabat">Pejabat</option>
                                                                     <option value="user">User</option>
@@ -342,23 +340,23 @@
         });
 
 
-        $(document).ready(function() {
+        // $(document).ready(function() {
 
-            $('.edit-btn').click(function() {
-                var id = $(this).data('id');
+        //     $('.edit-btn').click(function() {
+        //         var id = $(this).data('id');
 
-                $.ajax({
-                    url: '/admin/edit/' + id,
-                    method: 'GET',
-                    success: function(data) {
-                        $('#username_edit').val(data.username);
-                        $('#password_edit').val("");
-                        $('#user_type_edit').val(data.user_type);
-                        $('#editForm').attr('action', '/admin/update/' + id);
-                        $('#editModal').modal('show');
-                    }
-                });
-            });
-        });
+        //         $.ajax({
+        //             url: '/admin/edit/' + id,
+        //             method: 'GET',
+        //             success: function(data) {
+        //                 $('#username_edit').val(data.username);
+        //                 $('#password_edit').val("");
+        //                 $('#user_type_edit').val(data.user_type);
+        //                 $('#editForm').attr('action', '/admin/update/' + id);
+        //                 $('#editModal').modal('show');
+        //             }
+        //         });
+        //     });
+        // });
     </script>
 @endsection
