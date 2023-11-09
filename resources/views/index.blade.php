@@ -138,11 +138,11 @@
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">
+                                                        <th class="text-center" id="headr">
                                                             Username</th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Role
+                                                        <th class="text-center" id="headr">Role
                                                         </th>
-                                                        <th style="background-color: #A0E9FF;" class="text-center">Opsi
+                                                        <th class="text-center" id="headr">Opsi
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -175,7 +175,12 @@
             </div>
         </div>
     </div>
-
+    <style>
+        #headr{
+            background-color: #696CFF;
+            color: #F5F5F9;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
