@@ -90,6 +90,13 @@
         </ul>
       </li>
 
+      <li class="menu-item">
+        <a href="/logout" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+          <div data-i18n="Analytics">Logout</div>
+        </a>
+      </li>
+
 
       
      </ul>
