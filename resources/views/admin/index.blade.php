@@ -284,17 +284,19 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($data as $user)
-                                                        <tr>
-                                                            <td>{{ $user->username }}</td>
-                                                            <td>{{ $user->user_type }}</td>
-                                                            <td class="text-center">
+                                                    <tr>
+                                                        <td>{{ $user->username }}</td>
+                                                        <td>{{ $user->user_type }}</td>
+                                                        <td class="text-center">
+                                                            @if($user->user_type != 'admin')
                                                                 <a href="" class="btn btn-warning edit-btn"
-                                                                    data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
+                                                                   data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
                                                                 <a class="delete-btn btn btn-danger"
-                                                                    href="{{ route('admin.destroy', $user->id_user) }}">Hapus</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                                   href="{{ route('admin.destroy', $user->id_user) }}">Hapus</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
 
                                                 </tbody>
                                             </table>
