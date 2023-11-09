@@ -42,6 +42,47 @@ public function store(Request $request)
     return redirect()->back()->with('message', 'Data Berhasil Ditambahkan');
 }
 
+// public function edit($id)
+// {
+//     $user = Admin::findOrFail($id); // findOrFail akan menghasilkan error jika user tidak ditemukan
+//     // mengirim data user ke view
+//     return view('admin.index', compact('user')); // menggunakan fungsi compact untuk mempersingkat kode
+// }
+
+
+
+// public function update(Request $request, $id)
+// {
+//     $request->validate([
+//         'username' => 'required',
+//         'password' => 'required',
+//         'user_type' => 'required'
+//     ]);
+
+//     $user = Admin::find($id);
+
+//     $user->username = $request->username;
+//     $user->password = bcrypt($request->password); // encrypt password before saving
+//     $user->user_type = $request->user_type;
+
+//     $user->save();
+
+//     return response()->json([
+//         'message' => 'User updated successfully!'
+//     ], 200);
+// }
+
+
+public function destroy($id){
+    $admin_entry = admin::where('id_user', $id)->first();
+    $admin_entry->IsDelete = 1;
+    $admin_entry->save();
+
+    return redirect()
+        ->back()
+        ->with('message', 'Data User Berhasil Dihapus');
+
+}
 
 
 }

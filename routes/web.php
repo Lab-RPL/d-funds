@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 // admin
 Route::get('/dashboard',[AdminController::class,"index"])->name('admin.index');
 Route::post('/dashboard',[AdminController::class,"store"])->name('admin.store');
+Route::get('/dashboard/{id_user}',[AdminController::class,'destroy'])->name('admin.destroy');
+// Route::get('/dashboard/edit/{id_user}', [AdminController::class, 'edit'])->name('admin.edit');
+// Route::put('/dashboard/{id}', [AdminController::class, 'update'])->name('admin.update');
+
 
 
 // kour

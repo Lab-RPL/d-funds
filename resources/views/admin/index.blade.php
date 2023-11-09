@@ -142,9 +142,9 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="userModalLabel">Tambah Data User</h5>
-                                                        <button type="button" class="close" data-bs-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                        <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
 
@@ -152,7 +152,7 @@
                                                         <!-- Your form goes here -->
                                                         <form action="{{ route('admin.store') }}" method="post">
                                                             @csrf
-                                                           
+
                                                             <div class="mb-3">
                                                                 <label for="username" class="form-label">Username</label>
                                                                 <input type="text" class="form-control" id="username"
@@ -190,13 +190,67 @@
                                             </div>
                                         </div>
 
+                                        {{-- Edit Form --}}
+                                        <div class="modal fade" id="editModal" tabindex="-1"
+                                            aria-labelledby="editModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editModalLabel">Edit Data User</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="editForm" method="POST" action="">
+                                                            @method('PUT')
+                                                            <!-- penambahan method PUT karena biasanya update memerlukan method ini -->
+                                                            @csrf
+                                                            <div class="mb-3">
+                                                                <label for="username_edit"
+                                                                    class="form-label">Username</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="username_edit" name="username" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="password_edit"
+                                                                    class="form-label">Password</label>
+                                                                <input type="password" class="form-control"
+                                                                    id="password_edit" name="password" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="user_type_edit"
+                                                                    class="form-label">Role</label>
+                                                                <select class="form-select" id="user_type_edit"
+                                                                    name="user_type" required>
+                                                                    <option selected disabled hidden value="">
+                                                                        Choose...</option>
+                                                                    <option value="admin">Admin</option>
+                                                                    <option value="kour">Kour</option>
+                                                                    <option value="pejabat">Pejabat</option>
+                                                                    <option value="user">User</option>
+                                                                    <option value="pelaksana">Pelaksana</option>
+                                                                </select>
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-warning">Update
+                                                                Data</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <!-- Formulir dengan Tabel -->
                                         <form>
                                             @if (Session::has('message'))
-                                            <div id="pesan-sukses" class="alert alert-success mt-4">
-                                                {{ Session::get('message') }}</div>
-                                        @endif
+                                                <div id="pesan-sukses" class="alert alert-success mt-4">
+                                                    {{ Session::get('message') }}</div>
+                                            @endif
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -214,9 +268,10 @@
                                                             <td>{{ $user->username }}</td>
                                                             <td>{{ $user->user_type }}</td>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-warning">Edit</a>
+                                                                <a href="" class="btn btn-warning edit-btn"
+                                                                    data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
                                                                 <a class="delete-btn btn btn-danger"
-                                                                    href="#">Hapus</a>
+                                                                    href="{{ route('admin.destroy', $user->id_user) }}">Hapus</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -262,6 +317,26 @@
             ],
 
             pageLength: 5 // Menampilkan 5 data per halaman
+        });
+
+
+        $(document).ready(function() {
+
+            $('.edit-btn').click(function() {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: '/admin/edit/' + id,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#username_edit').val(data.username);
+                        $('#password_edit').val("");
+                        $('#user_type_edit').val(data.user_type);
+                        $('#editForm').attr('action', '/admin/update/' + id);
+                        $('#editModal').modal('show');
+                    }
+                });
+            });
         });
     </script>
 @endsection

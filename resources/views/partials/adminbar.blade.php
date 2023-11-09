@@ -70,7 +70,7 @@
       </li>
 
       <!-- Pengajuan Draft -->
-      <li class="menu-item">
+      {{-- <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Pengajuan Draft</div>
@@ -125,7 +125,7 @@
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Analytics">Arsip Batal</div>
         </a>
-      </li>
+      </li> --}}
       
       <li class="menu-item">
         <a href="/logout" class="menu-link">
