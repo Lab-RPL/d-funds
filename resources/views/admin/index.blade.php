@@ -131,10 +131,72 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <div class="card-body"> <!-- Tombol Tambah -->
-                                        <button type="submit" class="btn btn-primary mb-3">Tambah</button>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                                            data-bs-target="#userModal">Tambah</button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="userModal" tabindex="-1" role="dialog"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="userModalLabel">Tambah Data User</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <!-- Your form goes here -->
+                                                        <form action="{{ route('admin.store') }}" method="post">
+                                                            @csrf
+                                                           
+                                                            <div class="mb-3">
+                                                                <label for="username" class="form-label">Username</label>
+                                                                <input type="text" class="form-control" id="username"
+                                                                    name="username" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="password" class="form-label">Password</label>
+                                                                <input type="password" class="form-control"
+                                                                    id="password" name="password" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="user_type" class="form-label">Role</label>
+                                                                <select class="form-select" id="user_type"
+                                                                    name="user_type" required>
+                                                                    <option selected disabled hidden value="">
+                                                                        Choose...</option>
+                                                                    <option value="admin">Admin</option>
+                                                                    <option value="kour">Kour</option>
+                                                                    <option value="pejabat">Pejabat</option>
+                                                                    <option value="user">User</option>
+                                                                    <option value="pelaksana">Pelaksana</option>
+                                                                </select>
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Tambah
+                                                                Data</button>
+                                                        </form>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <!-- Formulir dengan Tabel -->
                                         <form>
+                                            @if (Session::has('message'))
+                                            <div id="pesan-sukses" class="alert alert-success mt-4">
+                                                {{ Session::get('message') }}</div>
+                                        @endif
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -176,16 +238,23 @@
         </div>
     </div>
     <style>
-        #headr{
+        #headr {
             background-color: #696CFF;
             color: #F5F5F9;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
+        setTimeout(function() {
+            document.getElementById('pesan-sukses').style.display = 'none';
+        }, 5000);
+
+
         $('#tabelData').DataTable({
             lengthMenu: [
                 [5, 10, 25, -1],

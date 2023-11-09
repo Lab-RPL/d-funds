@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 // admin
 Route::get('/dashboard',[AdminController::class,"index"])->name('admin.index');
+Route::post('/dashboard',[AdminController::class,"store"])->name('admin.store');
+
 
 // kour
 Route::get('/kour', function () {
