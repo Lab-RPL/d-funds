@@ -43,8 +43,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Profit</span>
-                                        <h3 class="card-title mb-2">$12,628</h3>
+                                        @php
+                                        $countPejabat = DB::table('users')
+                                            ->where('user_type', 'pejabat')
+                                            ->count();
+                                        @endphp
+                                        <span class="fw-medium d-block mb-1">Pejabat</span>
+                                        <h3 class="card-title mb-2">{{ $countPejabat }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -69,8 +74,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Sales</span>
-                                        <h3 class="card-title mb-2">$7,628</h3>
+                                        @php
+                                        $countUser = DB::table('users')
+                                            ->where('user_type', 'user')
+                                            ->count();
+                                        @endphp
+                                        <span class="fw-medium d-block mb-1">User</span>
+                                        <h3 class="card-title mb-2">{{ $countUser }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +105,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block mb-1">Payments</span>
-                                        <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                                        @php
+                                        $countKour = DB::table('users')
+                                            ->where('user_type', 'kour')
+                                            ->count();
+                                        @endphp
+                                        <span class="d-block mb-1">Kour</span>
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countKour }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -121,8 +136,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Transactions</span>
-                                        <h3 class="card-title mb-2">$14,857</h3>
+                                        @php
+                                        $countPelaksana = DB::table('users')
+                                            ->where('user_type', 'pelaksana')
+                                            ->count();
+                                        @endphp
+                                        <span class="fw-medium d-block mb-1">Pelaksana</span>
+                                        <h3 class="card-title mb-2">{{ $countPelaksana }}</h3>
                                     </div>
                                 </div>
                             </div>
