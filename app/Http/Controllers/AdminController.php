@@ -51,21 +51,16 @@ public function edit($id)
 public function update(Request $request, $id)
 {
     $user = admin::findOrFail($id);
-    
-    $validated = $request->validate([
-        'username' => 'required|max:255',
-        'password' => 'required',
-        'user_type' => 'required',
-    ]);
 
-    $user->username = $validated['username'];
-    $user->password = bcrypt($validated['password']);  //encrypt the password before saving it
-    $user->user_type = $validated['user_type'];
+    $user->username = $request->get('username');
+    $user->password = bcrypt($request->get('password'));  // encrypt the password before saving it
+    $user->user_type = $request->get('user_type');
 
     $user->save();
 
     return redirect()->route('admin.index')->with('message', 'User Berhasil Di Update');
 }
+
 
 
 
