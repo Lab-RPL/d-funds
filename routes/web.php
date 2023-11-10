@@ -52,3 +52,11 @@ Route::get('/user', function () {
 Route::get('/',[AuthController::class,'login']);
 Route::post('/',[AuthController::class,'masuk']);
 Route::get('/logout',[AuthController::class,'logout']);
+
+Route::get('/pengajuan', function (){
+    return view('pengajuan.pengajuan');
+});
+
+Route::get('/dokumen', function(){
+    return view('pengajuan.dokumen');
+});
