@@ -1,33 +1,79 @@
+
 @extends('layouts.main')
-
 @section('content')
-<div class="container">
-    <form action="{{ route('admin.update', $user->id_user) }}" method="POST">
-        @csrf
-        @method('PUT')
 
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}">
-        </div>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <div class="layout-page">
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <div class="row">
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                              <div class="card-body">
+                                  <form action="{{ route('admin.update', $user->id_user) }}" method="POST">
+                                      @csrf 
+                                      @method('PUT') 
+                                    <div class="row mb-3">
+                                      <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Username</label>
+                                      <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            name="username"
+                                            value="{{ $user->username }}"/>
+                                        </div>
+                                      </div>
+                                    </div>
 
-        <div class="mb-3">
-            <label for="user_type" class="form-label">Role</label>
-            <select class="form-select" id="user_type" name="user_type" required>
-              <option value="kour"{{ $user->user_type == 'kour' ? ' selected' : '' }}>Kour</option>
-              <option value="pejabat"{{ $user->user_type == 'pejabat' ? ' selected' : '' }}>Pejabat</option>
-              <option value="user"{{ $user->user_type == 'user' ? ' selected' : '' }}>User</option>
-              <option value="pelaksana"{{ $user->user_type == 'pelaksana' ? ' selected' : '' }}>Pelaksana</option>
-            </select>
+                                    <div class="row mb-3">
+                                      <label class="col-sm-2 col-form-label" >Password</label>
+                                      <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                          <input
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            class="form-control"/>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                      <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Role</label>
+                                      <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                            <select class="form-select" id="user_type" name="user_type" required>
+                                                <option value="kour"{{ $user->user_type == 'kour' ? ' selected' : '' }}>Kour</option>
+                                                <option value="pejabat"{{ $user->user_type == 'pejabat' ? ' selected' : '' }}>Pejabat</option>
+                                                <option value="user"{{ $user->user_type == 'user' ? ' selected' : '' }}>User</option>
+                                                <option value="pelaksana"{{ $user->user_type == 'pelaksana' ? ' selected' : '' }}>Pelaksana</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row justify-content-end">
+                                      <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                      </div>
+                                    </div>
+
+                                  </form>
+                                </div>
+                            </div>
+                         </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+    </div>
 </div>
+
+
 
 @endsection
