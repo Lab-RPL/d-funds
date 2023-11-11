@@ -60,7 +60,7 @@
                                     <div class="card-body">
                                         <div class="card-title d-flex align-items-start justify-content-between">
                                             <div class="avatar flex-shrink-0">
-                                                <img src="../assets/img/icons/unicons/wallet-info.png" alt="chart success"
+                                                <img src="../assets/img/icons/unicons/user-solid-24.png" alt="chart success"
                                                     class="rounded" />
                                             </div>
                                             <div class="dropdown">
@@ -180,9 +180,26 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="password" class="form-label">Password</label>
-                                                                <input type="password" class="form-control"
-                                                                    id="password" name="password" required>
+                                                                <div style="position:relative;">
+                                                                    <input id="password" type="password" class="form-control" name="password" required>
+                                                                    <i id="togglePassword" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</i>
+                                                                </div>
                                                             </div>
+                                                            
+                                                            
+                                                            <script>
+                                                                const togglePassword = document.querySelector('#togglePassword');
+                                                                const password = document.querySelector('#password');
+                                                            
+                                                                togglePassword.addEventListener('click', function (e) {
+                                                                    // toggle the type attribute
+                                                                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                                                                    password.setAttribute('type', type);
+                                                                    // toggle the eye slash icon
+                                                                    this.textContent = this.textContent === '👁️' ? '👁️‍🗨️' : '👁️';
+                                                                });
+                                                            </script>
+                                                            
                                                             <div class="mb-3">
                                                                 <label for="user_type" class="form-label">Role</label>
                                                                 <select class="form-select" id="user_type"
