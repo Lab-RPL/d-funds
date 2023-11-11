@@ -32,7 +32,7 @@
                                                 <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
                                                     class="rounded" />
                                             </div>
-                                            <div class="dropdown">
+                                            {{-- <div class="dropdown">
                                                 <button class="btn p-0" type="button" id="cardOpt3"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
@@ -41,7 +41,7 @@
                                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         @php
                                         $countPejabat = DB::table('users')
@@ -63,7 +63,7 @@
                                                 <img src="../assets/img/icons/unicons/user-solid-24.png" alt="chart success"
                                                     class="rounded" />
                                             </div>
-                                            <div class="dropdown">
+                                            {{-- <div class="dropdown">
                                                 <button class="btn p-0" type="button" id="cardOpt3"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
@@ -72,7 +72,7 @@
                                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         @php
                                         $countUser = DB::table('users')
@@ -94,7 +94,7 @@
                                                 <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card"
                                                     class="rounded" />
                                             </div>
-                                            <div class="dropdown">
+                                            {{-- <div class="dropdown">
                                                 <button class="btn p-0" type="button" id="cardOpt4"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
@@ -103,7 +103,7 @@
                                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         @php
                                         $countKour = DB::table('users')
@@ -125,7 +125,7 @@
                                                 <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
                                                     class="rounded" />
                                             </div>
-                                            <div class="dropdown">
+                                            {{-- <div class="dropdown">
                                                 <button class="btn p-0" type="button" id="cardOpt1"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
@@ -134,7 +134,7 @@
                                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         @php
                                         $countPelaksana = DB::table('users')
