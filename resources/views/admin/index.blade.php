@@ -14,7 +14,16 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1">
-                                                <h2 class="card-title">Selamat Datang di DFUNDS</h2>
+                                                @php
+                                                    $adminUser = \App\Models\User::where('user_type', 'admin')->first();
+                                                @endphp
+                                                <h2 class="card-title">
+                                                    @if($adminUser)
+                                                        Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                    @else
+                                                        Selamat Datang di DFUNDS
+                                                    @endif
+                                                </h2>
                                             </div>
                                             <img src="../assets/img/illustrations/man-with-laptop-light.png"
                                                 alt="Welcome Image" width="160">
@@ -23,6 +32,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- Card pertama - Profit -->
                             <div class="col-lg-3 col-md-3">
                                 <div class="card mb-4">
