@@ -60,3 +60,7 @@ Route::get('/pengajuan', function (){
 Route::get('/dokumen', function(){
     return view('pengajuan.dokumen');
 });
+
+Route::get('/lihat', function () {
+    return view('lihatpelaksana');
+});

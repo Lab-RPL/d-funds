@@ -22,7 +22,6 @@
         }
 
         .form-container {
-            border: 1px solid #ccc;
             border-radius: 5px;
             padding: 20px;
             width: 450px;

@@ -174,7 +174,6 @@
                                                         <h5 class="modal-title" id="userModalLabel">Tambah Data User</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
-                                                        <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
 
