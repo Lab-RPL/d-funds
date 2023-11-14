@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Card pertama - Profit -->
                             <div class="col-lg-3 col-md-3">
                                 <div class="card mb-4">
@@ -56,6 +56,8 @@
                                         @php
                                         $countPejabat = DB::table('users')
                                             ->where('user_type', 'pejabat')
+                                            ->where('IsDelete',0)
+
                                             ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">Pejabat</span>
@@ -87,6 +89,7 @@
                                         @php
                                         $countUser = DB::table('users')
                                             ->where('user_type', 'user')
+                                            ->where('IsDelete',0)
                                             ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">User</span>
@@ -117,11 +120,13 @@
                                         </div>
                                         @php
                                         $countKour = DB::table('users')
-                                            ->where('user_type', 'kour')
-                                            ->count();
-                                        @endphp
-                                        <span class="d-block mb-1">Kour</span>
-                                        <h3 class="card-title text-nowrap mb-2">{{ $countKour }}</h3>
+                                          ->where('user_type', 'kour')
+                                          ->where('IsDelete', 0)
+                                          ->count();
+                                      @endphp
+                                      <span class="d-block mb-1">Kour</span>
+                                      <h3 class="card-title text-nowrap mb-2">{{ $countKour }}</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +154,7 @@
                                         @php
                                         $countPelaksana = DB::table('users')
                                             ->where('user_type', 'pelaksana')
+                                            ->where('IsDelete',0)j
                                             ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">Pelaksana</span>
@@ -194,12 +200,12 @@
                                                                     <i id="togglePassword" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</i>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            
+
+
                                                             <script>
                                                                 const togglePassword = document.querySelector('#togglePassword');
                                                                 const password = document.querySelector('#password');
-                                                            
+
                                                                 togglePassword.addEventListener('click', function (e) {
                                                                     // toggle the type attribute
                                                                     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -208,7 +214,7 @@
                                                                     this.textContent = this.textContent === '👁️' ? '👁️‍🗨️' : '👁️';
                                                                 });
                                                             </script>
-                                                            
+
                                                             <div class="mb-3">
                                                                 <label for="user_type" class="form-label">Role</label>
                                                                 <select class="form-select" id="user_type"
