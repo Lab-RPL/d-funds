@@ -154,7 +154,7 @@
                                         @php
                                         $countPelaksana = DB::table('users')
                                             ->where('user_type', 'pelaksana')
-                                            ->where('IsDelete',0)j
+                                            ->where('IsDelete',0)
                                             ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">Pelaksana</span>
