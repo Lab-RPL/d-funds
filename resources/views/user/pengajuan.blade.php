@@ -2,63 +2,6 @@
 @section('content-user')
     <script src="https://kit.fontawesome.com/6d55e811a1.js" crossorigin="anonymous"></script>
 
-    <style>
-        .file-input-container {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .file-name-container {
-            flex: 1;
-        }
-
-        /* Style the input fields */
-        .file-input,
-        .file-name {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            margin-top: 5px;
-        }
-
-        .form-container {
-            border-radius: 5px;
-            padding: 20px;
-            width: 450px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        .submit-button {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-        }
-    </style>
 
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -193,4 +136,63 @@
             });
         });
     </script>
+
+    
+<style>
+    .file-input-container {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .file-name-container {
+        flex: 1;
+    }
+
+    /* Style the input fields */
+    .file-input,
+    .file-name {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+
+    .form-container {
+        border-radius: 5px;
+        padding: 20px;
+        width: 450px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .submit-button {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+</style>
 @endsection

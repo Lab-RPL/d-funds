@@ -38,14 +38,24 @@ Route::get('/pejabat', function () {
 
 // pelaksana
 Route::get('/pelaksana', function () {
-    return view('pelaksana');
+    return view('pelaksana.pelaksana');
 });
 
 // User
 Route::get('/user', function () {
-    return view('user');
+    return view('user.user');
 });
 
+Route::get('/lihatuser', function () {
+    return view('user.lihatuser');
+});
+Route::get('/pengajuan', function (){
+    return view('user.pengajuan');
+});
+
+Route::get('/dokumen', function(){
+    return view('user.dokumen');
+});
 
 
 // Login
@@ -53,14 +63,8 @@ Route::get('/',[AuthController::class,'login']);
 Route::post('/',[AuthController::class,'masuk']);
 Route::get('/logout',[AuthController::class,'logout']);
 
-Route::get('/pengajuan', function (){
-    return view('pengajuan.pengajuan');
-});
 
-Route::get('/dokumen', function(){
-    return view('pengajuan.dokumen');
-});
 
 Route::get('/lihat', function () {
-    return view('lihatpelaksana');
+    return view('pelaksana.lihatpelaksana');
 });
