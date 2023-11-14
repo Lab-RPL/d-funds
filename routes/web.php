@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\user_pageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,57 +15,49 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// admin
+
+
+// LOGIN
+Route::get('/',[AuthController::class,'login']);
+Route::post('/',[AuthController::class,'masuk']);
+Route::get('/logout',[AuthController::class,'logout']);
+
+
+// ADMIN
 Route::get('/dashboard',[AdminController::class,'index'])->name('admin.index');
 Route::post('/dashboard',[AdminController::class,'store'])->name('admin.store');
 Route::get('/dashboard/{id_user}',[AdminController::class,'destroy'])->name('admin.destroy');
 Route::get('/dashboard/edit/{id_user}',[AdminController::class,'edit'])->name('admin.edit');
 Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->name('admin.update');
-
 // Route::get('/dashboard/edit/{id_user}', [AdminController::class, 'edit'])->name('admin.edit');
 // Route::put('/dashboard/{id}', [AdminController::class, 'update'])->name('admin.update');
 
-
-
-// kour
+// KOUR
 Route::get('/kour', function () {
     return view('kour');
 });
 
-// pejabat
+// PEJABAT
 Route::get('/pejabat', function () {
     return view('pejabat');
 });
 
-// pelaksana
+// PELAKSANA
 Route::get('/pelaksana', function () {
     return view('pelaksana.pelaksana');
 });
+Route::get('/lihat', function () {
+    return view('pelaksana.lihatpelaksana');
+});
 
 // User
-Route::get('/user', function () {
-    return view('user.user');
-});
+Route::get('/user',[user_pageController::class, 'index'])->name('user.index');
+Route::get('/user/pengajuan',[user_pageController::class, 'create'])->name('user.create');
+Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
 
-Route::get('/lihatuser', function () {
-    return view('user.lihatuser');
-});
-Route::get('/pengajuan', function (){
-    return view('user.pengajuan');
-});
-
-Route::get('/dokumen', function(){
-    return view('user.dokumen');
-});
 
 
 // Login
 Route::get('/',[AuthController::class,'login']);
 Route::post('/',[AuthController::class,'masuk']);
 Route::get('/logout',[AuthController::class,'logout']);
-
-
-
-Route::get('/lihat', function () {
-    return view('pelaksana.lihatpelaksana');
-});

@@ -31,21 +31,53 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_kategori">Kategori</label>
-                                                    <select class="form-select" id="kategori" name="id_kategori">
-                                                        <option value="1">Kategori 1</option>
-                                                        <option value="2">Kategori 2</option>
-                                                        <option value="3">Kategori 3</option>
+                                                    <select class="form-select" id="id_kategori" name="id_kategori">
+                                                        <option value="">Pilih Kategori</option>
+                                                        @foreach ($kategoris as $kategori)
+                                                            <option value="{{ $kategori->id_kategori }}">
+                                                                {{ $kategori->kategori }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="obj_pembayaran">Objek Pembayaran</label>
-                                                    <input type="text" id="obj_pembayaran" name="obj_pembayaran"
-                                                        readonly>
+                                                    <input type="text" name="" id="obj_pembayaran" readonly disabled>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsi">Deskripsi</label>
                                                     <textarea class="form-control" id="deskripsi" name="deskripsi" readonly></textarea>
                                                 </div>
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                                <script type="text/javascript">
+                                                    $(document).ready(function() {
+                                                        $('#id_kategori').change(function() {
+                                                            var id_kategori = $(this).val();
+
+                                                            $.ajax({
+                                                                url: '/kategori/' + id_kategori,
+                                                                type: 'get',
+                                                                dataType: 'json',
+                                                                success: function(response) {
+                                                                    console.log(response);
+                                                                    if (response.status == 0) {
+                                                                        alert(response.message);
+                                                                    } else {
+                                                                        $('#obj_pembayaran').val(response.obj_pembayaran);
+                                                                        $('#deskripsi').val(response.deskripsi);
+                                                                    }
+                                                                }
+                                                            });
+
+                                                        });
+                                                    });
+                                                </script>
+
+
+
+
+
                                                 {{-- <div class="form-group" id="file-container">
                                                     <label for="file">File pendukung</label>
                                                     <div class="input-group">
@@ -73,16 +105,16 @@
                                                     <thead>
                                                         <tr>
                                                             <th><label for="nama_dokumen">Nama Dokumen</label></th>
-                                                            <th><label for="file">File pendukung</label></th>
+                                                            <th><label for="file">File Pendukung</label></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><input type="text" class="file-name"
-                                                                    name="nama_dokumen[]" style="height: 35px;" required>
+                                                            <td><input type="text" class="file-name" name="nama_dokumen"
+                                                                    style="height: 35px;" required>
                                                             </td>
                                                             <td><input type="file" class="file-input" name="file[]"
-                                                                    accept=".pdf, .doc" required></td>
+                                                                    accept=".pdf, .doc, .jpeg, .jpg, .png" required></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -109,7 +141,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Fungsi untuk menambahkan baris input
             function addRow() {
                 var newRow = '<tr>' +
@@ -118,20 +150,20 @@
                     '</tr>';
                 $('#document-table tbody').append(newRow);
             }
-    
+
             // Fungsi untuk menghapus baris input
             function removeRow() {
                 if ($('#document-table tbody tr').length > 1) {
                     $('#document-table tbody tr:last').remove();
                 }
             }
-    
+
             // Event click untuk tombol plus dan minus
-            $('.btn-plus').click(function () {
+            $('.btn-plus').click(function() {
                 addRow();
             });
-    
-            $('.btn-minus').click(function () {
+
+            $('.btn-minus').click(function() {
                 removeRow();
             });
         });

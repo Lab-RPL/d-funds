@@ -63,7 +63,7 @@
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
       <li class="menu-item active">
-        <a href="/user" class="menu-link">
+        <a href="{{ route('user.index') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
@@ -71,7 +71,7 @@
 
       <!-- Pengajuan Draft -->
       <li class="menu-item">
-        <a href="/pengajuan" class="menu-link ">
+        <a href="{{ route('user.create') }}" class="menu-link ">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Pengajuan Draft</div>
         </a>
