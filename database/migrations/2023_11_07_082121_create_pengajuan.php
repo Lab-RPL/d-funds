@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('unit_kerja');
             $table->unsignedBigInteger('id_kategori');
             $table->unsignedBigInteger('id_user');
+            $table->text('catatan')->nullable();
             $table->boolean('IsDelete')->default(0);
 
             $table->foreign('id_kategori')->references('id_kategori')->on('kategori');

@@ -11,7 +11,7 @@ class pengajuan extends Model
 
     protected $table = "pengajuan";
     protected $primaryKey = "id_pengajuan";
-    protected $fillable = ["id_pengajuan", "id_kategori", "id_user", "tentang", "unit_kerja"];
+    protected $fillable = ["id_pengajuan", "id_kategori", "id_user", "tentang", "unit_kerja", "catatan"];
 
     public function pengajuan() {
         return $this->belongsTo(kategori::class, 'id_pengajuan');

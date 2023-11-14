@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('kategori');
             $table->string('obj_pembayaran');
             $table->text('deskripsi')->nullable();
-            $table->text('keterangan')->nullable();
-            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

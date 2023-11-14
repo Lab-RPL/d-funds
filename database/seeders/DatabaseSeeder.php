@@ -61,11 +61,7 @@ class DatabaseSeeder extends Seeder
                             1a. Foto STNK
                             1b. Foto Bus dari depan, dalam, dan belakang
                             2. Kwitansi Penginapan
-                            3. Kwitansi Transport Lokal (Grab, Gojek, dll)",
-            'keterangan' => "1. Uang dibayarkan ke rekanan
-                            2. Uang dibayarkan ke ybs
-                            3. Uang dibayarkan ke ybs",
-            'catatan' => "Cek RKAT"
+                            3. Kwitansi Transport Lokal (Grab, Gojek, dll)"
         ]);
         kategori::create([
             'id_kategori' => 2,
@@ -75,9 +71,7 @@ class DatabaseSeeder extends Seeder
                             2. SPPD dan Lampiran berstempel
                             3. Tiket Pesawat / Kereta dan Boarding Pass
                             4. Kwitansi Penginapan
-                            5. Laporan Kegitan (lampiran foto)",
-            'keterangan' => "SPPD dibayarkan ybs",
-            'catatan' => "Cek RKAT"
+                            5. Laporan Kegitan (lampiran foto)"
         ]);
         kategori::create([
             'id_kategori' => 3,
