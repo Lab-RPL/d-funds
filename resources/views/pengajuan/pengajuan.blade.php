@@ -3,11 +3,29 @@
     <script src="https://kit.fontawesome.com/6d55e811a1.js" crossorigin="anonymous"></script>
 
     <style>
+        .file-input-container {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .file-name-container {
+            flex: 1;
+        }
+
+        /* Style the input fields */
+        .file-input,
+        .file-name {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
         .form-container {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 20px;
-            width: 400px;
+            width: 450px;
             margin: 0 auto;
             margin-top: 50px;
         }
@@ -66,6 +84,10 @@
                                                     <input type="text" id="unit_kerja" name="unit_kerja" required>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="catatan">Catatan</label>
+                                                    <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="id_kategori">Kategori</label>
                                                     <select class="form-select" id="kategori" name="id_kategori">
                                                         <option value="1">Kategori 1</option>
@@ -80,23 +102,54 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsi">Deskripsi</label>
-                                                    <input type="text" id="deskripsi" name="deskripsi" readonly>
+                                                    <textarea class="form-control" id="deskripsi" name="deskripsi" readonly></textarea>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="keterangan">Keterangan</label>
-                                                    <input type="text" id="keterangan" name="keterangan" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="catatan">Catatan</label>
-                                                    <input type="text" id="catatan" name="catatan" readonly>
-                                                </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group" id="file-container">
                                                     <label for="file">File pendukung</label>
-                                                    <input type="file" id="file" name="file" accept=".pdf, .doc"
-                                                        required>
-                                                    <a type="button"><i class="fa-solid fa-circle-plus mt-2"
+                                                    <div class="input-group">
+                                                        <input type="file" class="file-input" name="file[]"
+                                                            accept=".pdf, .doc" required>
+                                                        <label for="nama_dokumen">Nama Dokumen</label>
+                                                        <input type="text" id="nama_dokumen" name="nama_dokumen">
+                                                    </div>
+                                                </div> --}}
+                                                {{-- <div class="form-group" id="file-container">
+                                                    <label for="file">File pendukung</label>
+                                                    <div class="input-group">
+                                                        <div class="file-input-container">
+                                                            <input type="file" class="file-input" name="file[]"
+                                                                accept=".pdf, .doc" required>
+                                                        </div>
+                                                        <div class="file-name-container">
+                                                            <label for="nama_dokumen">Nama Dokumen</label>
+                                                            <input type="text" class="file-name" name="nama_dokumen[]"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                                <table id="document-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><label for="nama_dokumen">Nama Dokumen</label></th>
+                                                            <th><label for="file">File pendukung</label></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input type="text" class="file-name"
+                                                                    name="nama_dokumen[]" style="height: 35px;" required>
+                                                            </td>
+                                                            <td><input type="file" class="file-input" name="file[]"
+                                                                    accept=".pdf, .doc" required></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="form-group">
+                                                    <a type="button" class="btn-plus"><i
+                                                            class="fa-solid fa-circle-plus mt-2"
                                                             style="color: #2cc90d; font-size:35px;"></i></a>
-                                                    <a type="button"><i class="fa-solid fa-circle-minus mt-2"
+                                                    <a type="button" class="btn-minus"><i
+                                                            class="fa-solid fa-circle-minus mt-2"
                                                             style="color: #c90d0d; font-size:35px;"></i></a>
                                                 </div>
                                                 <button type="submit" class="submit-button">Submit</button>
@@ -111,4 +164,34 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Fungsi untuk menambahkan baris input
+            function addRow() {
+                var newRow = '<tr>' +
+                    '<td><input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required></td>' +
+                    '<td><input type="file" class="file-input" name="file[]" accept=".pdf, .doc" required></td>' +
+                    '</tr>';
+                $('#document-table tbody').append(newRow);
+            }
+    
+            // Fungsi untuk menghapus baris input
+            function removeRow() {
+                if ($('#document-table tbody tr').length > 1) {
+                    $('#document-table tbody tr:last').remove();
+                }
+            }
+    
+            // Event click untuk tombol plus dan minus
+            $('.btn-plus').click(function () {
+                addRow();
+            });
+    
+            $('.btn-minus').click(function () {
+                removeRow();
+            });
+        });
+    </script>
 @endsection
