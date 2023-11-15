@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('nama_dokumen');
             $table->string('nama_file');
             $table->unsignedBigInteger('id_pengajuan');
+            $table->unsignedBigInteger('id_disc');
             $table->boolean('IsDelete')->default(0);
             $table->foreign('id_pengajuan')->references('id_pengajuan')->on('pengajuan');
+            $table->foreign('id_disc')->references('id_disc')->on('discuss');
             $table->timestamps();
         });
     }

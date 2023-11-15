@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
 
         kategori::create([
             'id_kategori' => 1,
-            'kategori' => "Kunjungan",
+            'nama_kategori' => "Kunjungan",
             'obj_pembayaran' => "Rekanan",
             'deskripsi' => "1. Kwitansi Bus / Transport Sewa
                             1a. Foto STNK
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         ]);
         kategori::create([
             'id_kategori' => 2,
-            'kategori' => "Biaya Perjalanan Dinas",
+            'nama_kategori' => "Biaya Perjalanan Dinas",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "1. Surat Tugas
                             2. SPPD dan Lampiran berstempel
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
         kategori::create([
             'id_kategori' => 3,
-            'kategori' => "Honorarium Narsum",
+            'nama_kategori' => "Honorarium Narsum",
             'obj_pembayaran' => "Mitra",
             'deskripsi' => "1a. FC KTP Narasumber
                             1b. FC NPWP Narasumber
@@ -97,167 +97,167 @@ class DatabaseSeeder extends Seeder
         ]);
         kategori::create([
             'id_kategori' => 4,
-            'kategori' => "Tunjangan Struktural",
+            'nama_kategori' => "Tunjangan Struktural",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "Formulir pengajuan dilampiri SK untuk pejabat baru", 
         ]);
         kategori::create([
             'id_kategori' => 5,
-            'kategori' => "Tunjangan Fungsional",
+            'nama_kategori' => "Tunjangan Fungsional",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir pengajuan dilampiri SK untuk pejabat baru", 
         ]);
         kategori::create([
             'id_kategori' => 6,
-            'kategori' => "Honorarium Pembimbing Tugas Akhir",
+            'nama_kategori' => "Honorarium Pembimbing Tugas Akhir",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik dilampiri SK", 
         ]);
         kategori::create([
             'id_kategori' => 7,
-            'kategori' => "Honorarium Penguji Tugas Akhir",
+            'nama_kategori' => "Honorarium Penguji Tugas Akhir",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik dilampiri SK", 
         ]);
         kategori::create([
             'id_kategori' => 8,
-            'kategori' => "Honorarium Mengajar Komponen Sekolah",
+            'nama_kategori' => "Honorarium Mengajar Komponen Sekolah",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan dari SK diplampiri dengan rekap kehadiran", 
         ]);
         kategori::create([
             'id_kategori' => 9,
-            'kategori' => "Honorarium Mengajar Komponen SKS",
+            'nama_kategori' => "Honorarium Mengajar Komponen SKS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 10,
-            'kategori' => "Honorarium Mengajar Komponen Gelar",
+            'nama_kategori' => "Honorarium Mengajar Komponen Gelar",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 11,
-            'kategori' => "Honorarium Mengajar Komponen Jabatan Fungsional",
+            'nama_kategori' => "Honorarium Mengajar Komponen Jabatan Fungsional",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 12,
-            'kategori' => "Honorarium Dosen Praktisi Komponen Gelar",
+            'nama_kategori' => "Honorarium Dosen Praktisi Komponen Gelar",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 13,
-            'kategori' => "Honorarium Dosen Praktisi Komponen SKS",
+            'nama_kategori' => "Honorarium Dosen Praktisi Komponen SKS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 14,
-            'kategori' => "Honorarium Koreksi UTS",
+            'nama_kategori' => "Honorarium Koreksi UTS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik", 
         ]);
         kategori::create([
             'id_kategori' => 15,
-            'kategori' => "Honorarium Koreksi UAS",
+            'nama_kategori' => "Honorarium Koreksi UAS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik", 
         ]);
         kategori::create([
             'id_kategori' => 16,
-            'kategori' => "Honorarium Membuat Soal UTS",
+            'nama_kategori' => "Honorarium Membuat Soal UTS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik", 
         ]);
         kategori::create([
             'id_kategori' => 17,
-            'kategori' => "Honorarium Membuat Soal UAS",
+            'nama_kategori' => "Honorarium Membuat Soal UAS",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Akademik", 
         ]);
         kategori::create([
             'id_kategori' => 18,
-            'kategori' => "Honorarium Asesor Penilaian Karya Ilmiah",
+            'nama_kategori' => "Honorarium Asesor Penilaian Karya Ilmiah",
             'obj_pembayaran' => "Dosen", 
         ]);
         kategori::create([
             'id_kategori' => 19,
-            'kategori' => "IBK Dosen",
+            'nama_kategori' => "IBK Dosen",
             'obj_pembayaran' => "Dosen",
             'deskripsi' => "Rekap dari Vokasi", 
         ]);
         kategori::create([
             'id_kategori' => 20,
-            'kategori' => "Dana Kegiatan Mahasiswa",
+            'nama_kategori' => "Dana Kegiatan Mahasiswa",
             'obj_pembayaran' => "Mahasiswa",
         ]);
         kategori::create([
             'id_kategori' => 21,
-            'kategori' => "Honorarium Tim Jurnal",
+            'nama_kategori' => "Honorarium Tim Jurnal",
             'obj_pembayaran' => "Dosen",
         ]);
         kategori::create([
             'id_kategori' => 22,
-            'kategori' => "Honorarium Pembuatan Jurnal",
+            'nama_kategori' => "Honorarium Pembuatan Jurnal",
             'obj_pembayaran' => "Dosen",
         ]);
         kategori::create([
             'id_kategori' => 23,
-            'kategori' => "Honorarium Asistensi",
+            'nama_kategori' => "Honorarium Asistensi",
             'obj_pembayaran' => "Mahasiswa dan Alumni",
         ]);
         kategori::create([
             'id_kategori' => 24,
-            'kategori' => "Honorarium Tendik Paruh Waktu",
+            'nama_kategori' => "Honorarium Tendik Paruh Waktu",
             'obj_pembayaran' => "Tendik Paruh Waktu",
         ]);
         kategori::create([
             'id_kategori' => 25,
-            'kategori' => "IBK Tendik",
+            'nama_kategori' => "IBK Tendik",
             'obj_pembayaran' => "Tendik Paruh Waktu",
             'deskripsi' => "Rekap dari Vokasi", 
         ]);
         kategori::create([
             'id_kategori' => 26,
-            'kategori' => "Uang Makan non PNS",
+            'nama_kategori' => "Uang Makan non PNS",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "1. Rekap Presensi dari SDM
                             2. Formulir Pengajuan Uang Makan", 
         ]);
         kategori::create([
             'id_kategori' => 27,
-            'kategori' => "Uang Makan PNS",
+            'nama_kategori' => "Uang Makan PNS",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "Rekap Presensi dari SDM", 
         ]);
         kategori::create([
             'id_kategori' =>28,
-            'kategori' => "Gaji Pokok Tendik non PNS",
+            'nama_kategori' => "Gaji Pokok Tendik non PNS",
             'obj_pembayaran' => "Tendik",
             'deskripsi' => "Formulir Pengajuan", 
         ]);
         kategori::create([
             'id_kategori' => 29,
-            'kategori' => "Kepesertaan",
+            'nama_kategori' => "Kepesertaan",
             'obj_pembayaran' => "Dosen dan Tendik",
         ]);
         kategori::create([
             'id_kategori' => 30,
-            'kategori' => "Sertifikasi",
+            'nama_kategori' => "Sertifikasi",
             'obj_pembayaran' => "Dosen dan Tendik",
         ]);
         kategori::create([
             'id_kategori' => 31,
-            'kategori' => "Pembayaran Pengadaan",
+            'nama_kategori' => "Pembayaran Pengadaan",
             'obj_pembayaran' => "Rekanan",
         ]);
         kategori::create([
             'id_kategori' => 32,
-            'kategori' => "Pembayaran Sipinter",
+            'nama_kategori' => "Pembayaran Sipinter",
             'obj_pembayaran' => "Rekanan",
         ]);
     }

@@ -152,7 +152,7 @@
                                                     @foreach ($data as $da)
                                         <tr>
                                             <td>{{ $da->tentang }}</td>
-                                            <td>{{ $da->kategori }}</td>
+                                            <td>{{ $da->nama_kategori }}</td>
                                             <td>entah</td>
                                         </tr>
                                     @endforeach

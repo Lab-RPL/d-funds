@@ -14,7 +14,7 @@ class user_pageController extends Controller
 
         $data = DB::table('pengajuan')
         ->join('kategori', 'pengajuan.id_kategori', '=', 'kategori.id_kategori')
-        ->select('pengajuan.*', 'pengajuan.tentang', 'kategori.kategori')
+        ->select('pengajuan.*', 'pengajuan.tentang', 'kategori.nama_kategori')
         ->where('pengajuan.IsDelete',0)
         ->paginate(10000000);    
 

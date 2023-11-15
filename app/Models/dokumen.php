@@ -11,9 +11,12 @@ class dokumen extends Model
 
     protected $table = "dokumen";
     protected $primaryKey = "id_dokumen";
-    protected $fillable = ["id_dokumen", "id_pengajuan", "nama_dokumen", "nama_file"];
+    protected $fillable = ["id_dokumen", "id_pengajuan", "id_disc", "nama_dokumen", "nama_file"];
 
     protected function pengajuan() {
         return $this->belongsTo(pengajuan::class, 'id_pengajuan');
+    }
+    protected function discuss() {
+        return $this->belongsTo(discuss::class, 'id_disc');
     }
 }

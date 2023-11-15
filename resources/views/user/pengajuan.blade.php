@@ -35,7 +35,7 @@
                                                         <option value="">Pilih Kategori</option>
                                                         @foreach ($kategoris as $kategori)
                                                             <option value="{{ $kategori->id_kategori }}">
-                                                                {{ $kategori->kategori }}</option>
+                                                                {{ $kategori->nama_kategori }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
