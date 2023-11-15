@@ -15,7 +15,7 @@
 
                                         <div class="form-container">
                                             <h2>Form Pengajuan Draf</h2>
-                                            <form action="/submit_pengajuan" method="POST">
+                                            <form action="{{ route('user.store') }}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="tentang">Tentang</label>
@@ -113,7 +113,7 @@
                                                             <td><input type="text" class="file-name" name="nama_dokumen"
                                                                     style="height: 35px;" required>
                                                             </td>
-                                                            <td><input type="file" class="file-input" name="file[]"
+                                                            <td><input type="file" class="file-input" name="file"
                                                                     accept=".pdf, .doc, .jpeg, .jpg, .png" required></td>
                                                         </tr>
                                                     </tbody>

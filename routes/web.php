@@ -59,6 +59,8 @@ Route::get('/lihat', function () {
 // User
 Route::get('/user',[user_pageController::class, 'index'])->name('user.index');
 Route::get('/user/pengajuan',[user_pageController::class, 'create'])->name('user.create');
+Route::post('/user/pengajuan',[user_pageController::class, 'store'])->name('user.store');
+
 Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
 
 
