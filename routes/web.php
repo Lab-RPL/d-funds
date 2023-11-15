@@ -34,7 +34,10 @@ Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->nam
 
 // KOUR
 Route::get('/kour', function () {
-    return view('kour');
+    return view('kour.kour');
+});
+Route::get('/lihatkour', function () {
+    return view('kour.lihatkour');
 });
 
 // PEJABAT
