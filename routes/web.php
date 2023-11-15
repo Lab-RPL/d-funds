@@ -42,7 +42,10 @@ Route::get('/lihatkour', function () {
 
 // PEJABAT
 Route::get('/pejabat', function () {
-    return view('pejabat');
+    return view('pejabat.pejabat');
+});
+Route::get('/lihatpejabat', function () {
+    return view('pejabat.lihatpejabat');
 });
 
 // PELAKSANA
