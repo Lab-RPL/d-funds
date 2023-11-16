@@ -15,7 +15,7 @@
 
                                         <div class="form-container">
                                             <h2>Form Pengajuan Draf</h2>
-                                            <form action="{{ route('user.store') }}" method="POST">
+                                            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="tentang">Tentang</label>
@@ -110,11 +110,11 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><input type="text" class="file-name" name="nama_dokumen"
+                                                            <td><input type="text" class="file-name" name="nama_dokumen[]"
                                                                     style="height: 35px;" required>
                                                             </td>
-                                                            <td><input type="file" class="file-input" name="file"
-                                                                    accept=".pdf, .doc, .jpeg, .jpg, .png" required></td>
+                                                            <td><input type="file" class="file-input" name="nama_file[]"
+                                                                accept=".pdf, .doc, .jpeg, .jpg, .png" required></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -146,7 +146,7 @@
             function addRow() {
                 var newRow = '<tr>' +
                     '<td><input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required></td>' +
-                    '<td><input type="file" class="file-input" name="file[]" accept=".pdf, .doc" required></td>' +
+                    '<td><input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" required></td>' +
                     '</tr>';
                 $('#document-table tbody').append(newRow);
             }

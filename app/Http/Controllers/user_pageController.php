@@ -44,12 +44,9 @@ class user_pageController extends Controller
         // $request->validate([
         //     'tentang' => 'required',
         //     'unit_kerja' => 'required',
-        //     'catatan' => 'required',
         //     'id_kategori' => 'required',
-        //     'obj_pembayaran' => 'required',
-        //     'deskripsi' => 'required',
-        //     'file' => 'required',
         //     'nama_dokumen' => 'required',
+        //     'nama_file' => 'required',
         // ]);
 
         //Menyimpan data pengajuan
@@ -63,6 +60,32 @@ class user_pageController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
+        $files = $request->file('nama_file');
+        $documents = $request->get('nama_dokumen');
+        
+        // Assume both array $files and $documents are the same size
+        for($i = 0; $i < count($files); $i++) {
+            $dokumen = new dokumen();
+            $dokumen->id_pengajuan = $pengajuan->id_pengajuan;
+            $dokumen->nama_dokumen = $documents[$i];
+        
+            if(isset($files[$i])) {
+                $file = $files[$i];
+                $fileName = time() . '_' . $i . '.' .$file->getClientOriginalExtension();
+                $file->storeAs('public/suratna', $fileName);
+                $dokumen->nama_file = $fileName;
+            } else {
+                // Handle no file uploaded. You could provide a default file or cancel the operation
+                $dokumen->nama_file = 'default.txt';  // example default value
+            }
+            
+            $dokumen->save();
+        }
+        
+        
+
+        
+
         // $nama_dokumens = $request->nama_dokumen;
         // $files = $request->file('file');
 
@@ -71,19 +94,18 @@ class user_pageController extends Controller
         //     // Get the file's original extension and generate a new unique name for it
         //     $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
         //     $filePath = 'app/public/dokumen/' . $fileName;
-            
+
         //     // Move file to storage
         //     $file->move(storage_path('app/public/dokumen'), $fileName);
-            
-        //     dokumen::create([
-        //          "id_pengajuan" => $pengajuan->id,
-        //          "nama_dokumen" => $nama_dokumens[$i],
-        //          "file" => $filePath,
-        //      ]);
-        // }
-        
 
-        // //Menyimpan data dokumen dengan id_pengajuan
+        //     dokumen::create([
+        //         'id_pengajuan' => $pengajuan->id_pengajuan,
+        //         'nama_dokumen' => $nama_dokumens[$i],
+        //         'nama_file' => $filePath,
+        //     ]);
+        // }
+
+        //Menyimpan data dokumen dengan id_pengajuan
         // $nama_dokumens = $request->nama_dokumen;
         // $docs = $request->file('file'); // "file" should be a name of input field in the form
 
@@ -117,10 +139,10 @@ class user_pageController extends Controller
         //     $file->move($folder, $fileName);
 
         //     dokumen::create([
-        //          "id_pengajuan" => $pengajuan->id,
-        //          "nama_dokumen" => $nama_dokumens[$i],
-        //          "file" => $fileName,
-        //      ]);
+        //         'id_pengajuan' => $pengajuan->id_pengajuan,
+        //         'nama_dokumen' => $nama_dokumens[$i],
+        //         'nama_file' => $fileName,
+        //     ]);
         // }
 
         return redirect()->route('user.index');
