@@ -14,8 +14,17 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1">
-                                                <h2 class="card-title">Tampilan sementara User DFUNDS</h2>
-                                            </div>
+                                                @php
+                                                    $adminUser = \App\Models\User::where('user_type', 'user')->first();
+                                                @endphp
+                                                    <h2 class="card-title">
+                                                        @if($adminUser)
+                                                            Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                        @else
+                                                            Selamat Datang di DFUNDS
+                                                        @endif
+                                                    </h2>
+                                              </div>
                                             <img src="../assets/img/illustrations/man-with-laptop-light.png"
                                                 alt="Welcome Image" width="160">
                                         </div>
@@ -153,7 +162,7 @@
                                         <tr>
                                             <td>{{ $da->tentang }}</td>
                                             <td>{{ $da->nama_kategori }}</td>
-                                            <td>entah</td>
+                                            <td><a href="/lihatuser" class="btn btn-primary">Lihat</a></td>
                                         </tr>
                                     @endforeach
 

@@ -62,6 +62,9 @@ Route::get('/user/pengajuan',[user_pageController::class, 'create'])->name('user
 Route::post('/user/pengajuan',[user_pageController::class, 'store'])->name('user.store');
 
 Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
+Route::get('/lihatuser', function() {
+    return view('user.lihatuser');
+});
 
 
 
