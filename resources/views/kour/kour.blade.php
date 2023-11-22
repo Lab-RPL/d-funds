@@ -37,10 +37,13 @@
                             <!-- Tabel Data -->
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body"> <!-- Tombol Tambah -->
                                         <!-- Formulir dengan Tabel -->
                                         <form>
-
+                                            @if (Session::has('message'))
+                                                <div id="pesan-sukses" class="alert alert-success mt-4">
+                                                    {{ Session::get('message') }}</div>
+                                            @endif
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -52,9 +55,8 @@
                                                         <th class="text-center" id="headr">Opsi</th>
                                                     </tr>
                                                 </thead>
-
-                                                @foreach ($data as $da)
-                                                    <tbody>
+                                                <tbody>
+                                                    @foreach ($data as $da)
                                                         <tr>
                                                             <td>{{ $da->tentang }}</td>
                                                             <td>{{ $da->created_at }}</td>
@@ -65,10 +67,10 @@
                                                                 <a href="#" class="btn btn-primary">Diskusi</a>
                                                             </td>
                                                         </tr>
-                                                    </tbody>
-                                                @endforeach
-                                            </table>
+                                                    @endforeach
 
+                                                </tbody>
+                                            </table>
                                         </form>
                                     </div>
                                 </div>
