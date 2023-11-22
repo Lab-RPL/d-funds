@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\discuss;
 use App\Models\dokumen;
 use App\Models\pengajuan;
 use Illuminate\Http\Request;
@@ -27,17 +28,27 @@ class user_pageController extends Controller
     //...
     public function detailUser($id)
     {
-        // The method for fetching a single record can vary.
-        // Here I'm using DB query builder and 'first' method to get a single row
-        // You may need to adjust the below line based on your specific schema
+        // Fetch pengajuan and related kategori
         $data = DB::table('pengajuan')
             ->join('kategori', 'pengajuan.id_kategori', '=', 'kategori.id_kategori')
-            ->select('pengajuan.*', 'pengajuan.tentang', 'kategori.nama_kategori')
-            ->where('id_pengajuan', $id)
+            ->select('pengajuan.*', 'kategori.nama_kategori')
+            ->where('pengajuan.id_pengajuan', $id)
             ->first();
 
-        return view('user.lihatuser', compact('data'));
+        // Fetch all related dokumen
+        $dokumens = DB::table('dokumen')
+            ->where('id_pengajuan', $id)
+            ->get();
+
+        $discusses = DB::table('discuss')
+            ->join('users', 'discuss.id_user', '=', 'users.id_user')
+            ->select('discuss.*', 'users.username') // Assuming users table has 'name'
+            ->where('discuss.id_pengajuan', $id)
+            ->get();
+
+        return view('user.lihatuser', compact('data', 'dokumens','discusses'));
     }
+
     //...
 
     public function getKategoriDetail($id_kategori)
@@ -158,5 +169,30 @@ class user_pageController extends Controller
         // }
 
         return redirect()->route('user.index');
+    }
+
+    public function createDiskusi()
+    {
+        return view('user.lihatuser');
+    }
+    public function storeDiscuss(Request $request)
+    {
+        // validate the incoming request data
+        $validated = $request->validate([
+            'id_pengajuan' => 'required|exists:pengajuan,id_pengajuan',
+            'Komentar' => 'required|string',
+        ]);
+
+        // Create the discussion
+        discuss::create([
+            'id_pengajuan' => $validated['id_pengajuan'],
+            'id_user' => $request->session()->get('user_id'),
+            'isi' => $validated['Komentar'],
+        ]);
+
+        // Redirect back with success message
+        return redirect()
+            ->back()
+            ->with('message', 'Discussion added successfully!');
     }
 }
