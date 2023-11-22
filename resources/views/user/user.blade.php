@@ -162,7 +162,7 @@
                                         <tr>
                                             <td>{{ $da->tentang }}</td>
                                             <td>{{ $da->nama_kategori }}</td>
-                                            <td><a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}" class="btn btn-primary">Diskusi</a></td>
+                                            <td class="text-center"><a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}" class="btn btn-primary">Diskusi</a></td>
                                         </tr>
                                     @endforeach
 

@@ -126,7 +126,7 @@
                                                             class="fa-solid fa-circle-minus mt-2"
                                                             style="color: #c90d0d; font-size:35px;"></i></a>
                                                 </div>
-                                                <button type="submit" class="submit-button">Submit</button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         </div>
                                     </div>
