@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->text('catatan')->nullable();
             $table->boolean('IsDelete')->default(0);
+            $table->boolean('IsApproved')->default(0);
 
             $table->foreign('id_kategori')->references('id_kategori')->on('kategori');
             $table->foreign('id_user')->references('id_user')->on('users');
