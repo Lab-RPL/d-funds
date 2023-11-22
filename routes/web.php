@@ -60,6 +60,7 @@ Route::post('/user/pengajuan',[user_pageController::class, 'store'])->name('user
 Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
 Route::get('/lihatuser/{id}',[user_pageController::class,"detailUser"])->name('user.detail');
 Route::post('/store-discuss', [user_pageController::class, "storeDiscuss"])->name('store.discuss');
+Route::get('/lihatuser/{id}/download', [user_pageController::class, 'download'])->name('surat.download');
 
 
 

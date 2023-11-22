@@ -40,13 +40,14 @@ class user_pageController extends Controller
             ->where('id_pengajuan', $id)
             ->get();
 
-        $discusses = DB::table('discuss')
+            $discusses = DB::table('discuss')
             ->join('users', 'discuss.id_user', '=', 'users.id_user')
-            ->select('discuss.*', 'users.username') // Assuming users table has 'name'
+            ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
+            ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc') 
             ->where('discuss.id_pengajuan', $id)
             ->get();
 
-        return view('user.lihatuser', compact('data', 'dokumens','discusses'));
+        return view('user.lihatuser', compact('data', 'dokumens', 'discusses'));
     }
 
     //...
@@ -184,15 +185,51 @@ class user_pageController extends Controller
         ]);
 
         // Create the discussion
-        discuss::create([
+        $diskusi = discuss::create([
             'id_pengajuan' => $validated['id_pengajuan'],
             'id_user' => $request->session()->get('user_id'),
             'isi' => $validated['Komentar'],
         ]);
 
-        // Redirect back with success message
+        $files = $request->file('file');
+
+        // Assume both array $files and $documents are the same size
+        if (is_array($files)) {
+            for ($i = 0; $i < count($files); $i++) {
+                $docdisc = new dokumen();
+                $docdisc->id_disc = $diskusi->id_disc;
+
+                if (isset($files[$i])) {
+                    $file = $files[$i];
+                    $fileName = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
+                    $file->storeAs('public/suratna', $fileName);
+                    $docdisc->nama_file = $fileName;
+                } else {
+                    // Handle no file uploaded. You could provide a default file or cancel the operation
+                    $docdisc->nama_file = 'default.txt'; // example default value
+                }
+
+                $docdisc->save();
+
+                // Redirect back with success message
+            }
+        }
         return redirect()
             ->back()
             ->with('message', 'Discussion added successfully!');
+    }
+    public function download($id_dokumen)
+    {
+        try {
+            $surat = dokumen::findOrFail($id_dokumen);
+            $path = storage_path('app/public/suratna/' . $surat->nama_file);
+
+            return response()->download($path);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Handle the case where data with the given ID is not found.
+            return redirect()
+                ->back()
+                ->with('error', 'Surat not found.');
+        }
     }
 }

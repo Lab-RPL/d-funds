@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokumen', function (Blueprint $table) {
             $table->bigIncrements('id_dokumen');
-            $table->string('nama_dokumen');
+            $table->string('nama_dokumen')->nullable();
             $table->string('nama_file');
             $table->unsignedBigInteger('id_pengajuan')->nullable();
             $table->unsignedBigInteger('id_disc')->nullable();

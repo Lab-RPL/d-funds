@@ -61,7 +61,7 @@
                                                         @if($key !== 0)
                                                             <tr>
                                                         @endif
-                                                            <td>{{ $dokumen->nama_dokumen }}</td>
+                                                            <td><a href="{{ route('surat.download', $dokumen->id_dokumen) }}">{{ $dokumen->nama_dokumen }}</a></td>
                                                         </tr>
                                                     @endforeach
                                                 </tr>
@@ -78,7 +78,7 @@
                                     <h5 class="card-header bg-primary text-white">Diskusi</h5>
                                     <div class="card-body">
                                         <!-- Form untuk menambahkan komentar -->
-                                        <form action="{{ route('store.discuss') }}" method="POST">
+                                        <form action="{{ route('store.discuss') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="comment" class="form-label">Tambahkan Komentar:</label>
@@ -87,7 +87,7 @@
                                             <input type="hidden" name="id_pengajuan" value="{{ $data->id_pengajuan }}" />
                                             <div class="mb-3">
                                                 <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
-                                                <input type="file" class="form-control" id="uploadFile" name="file">
+                                                <input type="file" class="form-control" id="uploadFile" name="file[]">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Kirim</button>
                                         </form>
@@ -100,13 +100,20 @@
                                                     <li class="list-group-item">
                                                         <strong>{{ $discuss->username }}:</strong> {{ $discuss->isi }}
                                                         <br>
+                                                        @if($discuss->nama_file)
+                                                            <!-- display file name and provide download link -->
+                                                            <a href="{{ asset('storage/suratna/' . $discuss->nama_file) }}" download>
+                                                                {{ $discuss->nama_file }}
+                                                            </a>
+                                                        @endif
+                                                        <br>
                                                         <small>{{ $discuss->created_at}}</small>
-
                                                     </li>
                                                 @endforeach
                                             </ul>
                                             <a href="/user"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
                                         </div>
+                                        
                                         
                                     </div>
                                 </div>
