@@ -101,6 +101,7 @@
                                                         <strong>{{ $discuss->username }}:</strong> {{ $discuss->isi }}
                                                         <br>
                                                         @if($discuss->nama_file)
+                                                        <strong>Download Dokumen</strong>
                                                             <!-- display file name and provide download link -->
                                                             <a href="{{ asset('storage/suratna/' . $discuss->nama_file) }}" download>
                                                                 {{ $discuss->nama_file }}
