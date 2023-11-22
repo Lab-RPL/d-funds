@@ -61,7 +61,7 @@
                                                         @if($key !== 0)
                                                             <tr>
                                                         @endif
-                                                            <td><a href="{{ route('surat.download', $dokumen->id_dokumen) }}">{{ $dokumen->nama_dokumen }}</a></td>
+                                                            <td><a target="_blank" href="{{ route('surat.download', $dokumen->id_dokumen) }}">{{ $dokumen->nama_dokumen }}</a></td>
                                                         </tr>
                                                     @endforeach
                                                 </tr>
@@ -103,8 +103,8 @@
                                                         @if($discuss->nama_file)
                                                         <strong>Download Dokumen</strong>
                                                             <!-- display file name and provide download link -->
-                                                            <a href="{{ asset('storage/suratna/' . $discuss->nama_file) }}" download>
-                                                                {{ $discuss->nama_file }}
+                                                            <a href="{{ asset('storage/suratna/' . $discuss->nama_file) }}">
+                                                                Preview {{ $discuss->nama_file }}
                                                             </a>
                                                         @endif
                                                         <br>
