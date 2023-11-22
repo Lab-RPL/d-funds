@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_pengajuan');
             $table->text('isi');
-            $table->string('tambah_berkas')->nullable();
             $table->timestamps();
         });
     }
