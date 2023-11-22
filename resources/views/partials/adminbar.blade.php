@@ -50,7 +50,7 @@
             </g>
           </svg>
         </span>
-        <span class="app-brand-text menu-text fw-bold ms-2">DFUNS</span>
+        <span class="app-brand-text menu-text fw-bold ms-2">DFUNDS</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
