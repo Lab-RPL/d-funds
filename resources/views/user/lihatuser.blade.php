@@ -21,14 +21,14 @@
                                             <td class="bg-label-primary">
                                             <span class="fw-medium">Tentang</span>
                                             </td>
-                                            <td>Pengangkatan Dosen Semester Gasal</td>
+                                            <td>{{ $data->tentang }}</td>
                                         </tr>
 
                                         <tr >
                                             <td class="bg-label-primary">
                                                 <span class="fw-medium">Tanggal Pengajuan</span>
                                             </td>
-                                            <td>09 - 12 - 2022</td>
+                                            <td>{{ \Carbon\Carbon::parse($data->created_at)->timezone('Asia/Jakarta')->format('d-m-Y H:i:s') }}</td>
                                         </tr>
 
                                         <tr >
@@ -36,7 +36,7 @@
 
                                             <span class="fw-medium">Kategori</span>
                                             </td>
-                                            <td>Keputusan</td>
+                                            <td>{{ $data->nama_kategori }}</td>
                                         </tr>
                                         
                                         <tr >
@@ -44,7 +44,7 @@
                                     
                                             <span class="fw-medium">Unit Kerja</span>
                                             </td>
-                                            <td>Kantor Hukor Universitas</td>
+                                            <td>{{ $data->unit_kerja }}</td>
                                         </tr>
 
                                         <tr >

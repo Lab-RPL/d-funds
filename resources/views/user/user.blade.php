@@ -162,7 +162,7 @@
                                         <tr>
                                             <td>{{ $da->tentang }}</td>
                                             <td>{{ $da->nama_kategori }}</td>
-                                            <td><a href="/lihatuser" class="btn btn-primary">Lihat</a></td>
+                                            <td><a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}" class="btn btn-primary">Lihat</a></td>
                                         </tr>
                                     @endforeach
 

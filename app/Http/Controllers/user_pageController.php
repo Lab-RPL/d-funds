@@ -24,6 +24,22 @@ class user_pageController extends Controller
         return view('user.user', compact('data'));
     }
 
+    //...
+    public function detailUser($id)
+    {
+        // The method for fetching a single record can vary.
+        // Here I'm using DB query builder and 'first' method to get a single row
+        // You may need to adjust the below line based on your specific schema
+        $data = DB::table('pengajuan')
+            ->join('kategori', 'pengajuan.id_kategori', '=', 'kategori.id_kategori')
+            ->select('pengajuan.*', 'pengajuan.tentang', 'kategori.nama_kategori')
+            ->where('id_pengajuan', $id)
+            ->first();
+
+        return view('user.lihatuser', compact('data'));
+    }
+    //...
+
     public function getKategoriDetail($id_kategori)
     {
         $data = DB::table('kategori')
@@ -62,29 +78,25 @@ class user_pageController extends Controller
 
         $files = $request->file('nama_file');
         $documents = $request->get('nama_dokumen');
-        
+
         // Assume both array $files and $documents are the same size
-        for($i = 0; $i < count($files); $i++) {
+        for ($i = 0; $i < count($files); $i++) {
             $dokumen = new dokumen();
             $dokumen->id_pengajuan = $pengajuan->id_pengajuan;
             $dokumen->nama_dokumen = $documents[$i];
-        
-            if(isset($files[$i])) {
+
+            if (isset($files[$i])) {
                 $file = $files[$i];
-                $fileName = time() . '_' . $i . '.' .$file->getClientOriginalExtension();
+                $fileName = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('public/suratna', $fileName);
                 $dokumen->nama_file = $fileName;
             } else {
                 // Handle no file uploaded. You could provide a default file or cancel the operation
-                $dokumen->nama_file = 'default.txt';  // example default value
+                $dokumen->nama_file = 'default.txt'; // example default value
             }
-            
+
             $dokumen->save();
         }
-        
-        
-
-        
 
         // $nama_dokumens = $request->nama_dokumen;
         // $files = $request->file('file');
