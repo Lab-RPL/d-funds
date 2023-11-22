@@ -64,7 +64,7 @@
                                                             <td>{{ $da->unit_kerja }}</td>
                                                             <td></td>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-primary">Diskusi</a>
+                                                                <a href="{{ route('kour.discuss', ['id' => $da->id_pengajuan]) }}" class="btn btn-primary">Diskusi</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

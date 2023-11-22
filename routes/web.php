@@ -34,8 +34,11 @@ Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->nam
 // Route::put('/dashboard/{id}', [AdminController::class, 'update'])->name('admin.update');
 
 // KOUR
-Route::get('kour',[kourController::class,'index'])->name('kour.index');
-Route::get('kour-discuss',[kourController::class,'discussion'])->name('kour.discuss');
+Route::get('/kour',[kourController::class,'index'])->name('kour.index');
+Route::get('/kour-discuss/{id}',[kourController::class,'discussion'])->name('kour.discuss');
+Route::post('/kour-discuss-store', [user_pageController::class, "storeDiscuss"])->name('kour.store_discuss');
+Route::get('/kour-discuss/{id}/download', [user_pageController::class, 'download'])->name('kour.download');
+
 // PEJABAT
 Route::get('/pejabat', function () {
     return view('pejabat.pejabat');

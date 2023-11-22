@@ -61,7 +61,7 @@ class user_pageController extends Controller
     }
 
     public function create()
-    {
+    {   
         $kategoris = DB::table('kategori')->get();
 
         return view('user.pengajuan', compact('kategoris'));
@@ -172,10 +172,6 @@ class user_pageController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function createDiskusi()
-    {
-        return view('user.lihatuser');
-    }
     public function storeDiscuss(Request $request)
     {
         // validate the incoming request data
