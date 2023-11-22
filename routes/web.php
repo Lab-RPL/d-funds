@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\kourController;
 use App\Http\Controllers\user_pageController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,13 +34,8 @@ Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->nam
 // Route::put('/dashboard/{id}', [AdminController::class, 'update'])->name('admin.update');
 
 // KOUR
-Route::get('/kour', function () {
-    return view('kour.kour');
-});
-Route::get('/lihatkour', function () {
-    return view('kour.lihatkour');
-});
-
+Route::get('kour',[kourController::class,'index'])->name('kour.index');
+Route::get('kour-discuss',[kourController::class,'discussion'])->name('kour.discuss');
 // PEJABAT
 Route::get('/pejabat', function () {
     return view('pejabat.pejabat');
