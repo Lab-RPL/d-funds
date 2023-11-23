@@ -62,71 +62,13 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
+      <li class="menu-item {{ Route::currentRouteName() == 'admin.index' || 'admin.edit' ? 'active' : '' }}">
         <a href="/dashboard" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
-
-      <!-- Pengajuan Draft -->
-      {{-- <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Pengajuan Draft</div>
-        </a>
-
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="layouts-without-menu.html" class="menu-link">
-              <div data-i18n="Without menu">Without menu</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-without-navbar.html" class="menu-link">
-              <div data-i18n="Without navbar">Without navbar</div>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!--Persetujuan-->
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Layouts">Persetujuan/TTD</div>
-        </a>
-
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="layouts-without-menu.html" class="menu-link">
-              <div data-i18n="Without menu">Without menu</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="layouts-without-navbar.html" class="menu-link">
-              <div data-i18n="Without navbar">Without navbar</div>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!--Arsip Final-->
-      <li class="menu-item">
-        <a href="/" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-home-circle"></i>
-          <div data-i18n="Analytics">Arsip Final</div>
-        </a>
-      </li>
-
-      <!--Arsip Batal-->
-      <li class="menu-item">
-        <a href="/" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-          <div data-i18n="Analytics">Arsip Batal</div>
-        </a>
-      </li> --}}
-      
+            
       <li class="menu-item">
         <a href="/logout" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
