@@ -57,43 +57,44 @@ class DatabaseSeeder extends Seeder
             'id_kategori' => 1,
             'nama_kategori' => "Kunjungan",
             'obj_pembayaran' => "Rekanan",
-            'deskripsi' => "1. Kwitansi Bus / Transport Sewa
-                            1a. Foto STNK
-                            1b. Foto Bus dari depan, dalam, dan belakang
-                            2. Kwitansi Penginapan
-                            3. Kwitansi Transport Lokal (Grab, Gojek, dll)"
+            'deskripsi' => "1a. Kwitansi Bus / Transport Sewa
+1b. Foto STNK
+1c. Foto Bus dari depan, dalam, dan belakang
+2. Kwitansi Penginapan
+3. Kwitansi Transport Lokal (Grab, Gojek, dll)"
+
         ]);
         kategori::create([
             'id_kategori' => 2,
             'nama_kategori' => "Biaya Perjalanan Dinas",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "1. Surat Tugas
-                            2. SPPD dan Lampiran berstempel
-                            3. Tiket Pesawat / Kereta dan Boarding Pass
-                            4. Kwitansi Penginapan
-                            5. Laporan Kegitan (lampiran foto)"
+2. SPPD dan Lampiran berstempel
+3. Tiket Pesawat / Kereta dan Boarding Pass
+4. Kwitansi Penginapan
+5. Laporan Kegitan (lampiran foto)"
         ]);
         kategori::create([
             'id_kategori' => 3,
             'nama_kategori' => "Honorarium Narsum",
             'obj_pembayaran' => "Mitra",
             'deskripsi' => "1a. FC KTP Narasumber
-                            1b. FC NPWP Narasumber
-                            1c. FC Rekening Narasumber
-                            1d. No. Telepon
-                            1e. Instansi Asal
-                            2. Surat Permohonan sebagai Narasumber dam Rundown 
-                            3. Surat jawaban kesediaan sebagai Narasumber
-                            4. Notulen / Materi
-                            5. Foto kegiatan (Screenshot acara dari awal, tengah dan akhir.)
-                            6. Brosur terkait kegiatan
-                            7. CV Pembicara
-                            8. Jadwal acara (rundown kegiatan)
-                            9a. Daftar hadir pemateri
-                            9b. Daftar hadir peserta luring
-                            9c. Daftar hadir peserta daring
-                            10. Foto Narasumber bertanda tangan PIC
-                            11. Surat Tugas dari instansi pihak narasumber (bila ada)", 
+1b. FC NPWP Narasumber
+1c. FC Rekening Narasumber
+1d. No. Telepon
+1e. Instansi Asal
+2. Surat Permohonan sebagai Narasumber dam Rundown 
+3. Surat jawaban kesediaan sebagai Narasumber
+4. Notulen / Materi
+5. Foto kegiatan (Screenshot acara dari awal, tengah dan akhir.)
+6. Brosur terkait kegiatan
+7. CV Pembicara
+8. Jadwal acara (rundown kegiatan)
+9a. Daftar hadir pemateri
+9b. Daftar hadir peserta luring
+9c. Daftar hadir peserta daring
+10. Foto Narasumber bertanda tangan PIC
+11. Surat Tugas dari instansi pihak narasumber (bila ada)", 
         ]);
         kategori::create([
             'id_kategori' => 4,
@@ -226,7 +227,7 @@ class DatabaseSeeder extends Seeder
             'nama_kategori' => "Uang Makan non PNS",
             'obj_pembayaran' => "Dosen dan Tendik",
             'deskripsi' => "1. Rekap Presensi dari SDM
-                            2. Formulir Pengajuan Uang Makan", 
+2. Formulir Pengajuan Uang Makan", 
         ]);
         kategori::create([
             'id_kategori' => 27,
