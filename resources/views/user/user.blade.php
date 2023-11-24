@@ -196,6 +196,7 @@
                                                                 <td>{{ $da->nama_kategori }}</td>
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
+                                                                    <i class="fa-regular fa-clock text-primary"></i>
                                                                         Menunggu di setujui
                                                                     @elseif($da->IsApproved == 1)
                                                                         <i class="fas fa-check text-success"></i> Sudah di setujui
