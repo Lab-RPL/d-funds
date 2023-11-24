@@ -1,6 +1,7 @@
 @extends('layouts.user-main')
 @section('content-user')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -197,9 +198,9 @@
                                                                     @if ($da->IsApproved == 0)
                                                                         Menunggu di setujui
                                                                     @elseif($da->IsApproved == 1)
-                                                                        Sudah di setujui
+                                                                        <i class="fas fa-check text-success"></i> Sudah di setujui
                                                                     @else
-                                                                        Tidak disetujui
+                                                                        <i class="fas fa-times text-danger"></i> Tidak disetujui
                                                                     @endif
                                                                 </td>
                                                                 <td class="text-center">
