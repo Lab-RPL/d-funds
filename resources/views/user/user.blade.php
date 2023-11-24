@@ -52,8 +52,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Profit</span>
-                                        <h3 class="card-title mb-2">$12,628</h3>
+                                        <span class="fw-medium d-block mb-1">Total Pengajuan</span>
+                                        @php
+                                        $countPengajuan = DB::table('pengajuan')
+                                            ->where('IsDelete',0)
+                                            ->count();
+                                        @endphp
+                                        <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +83,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Sales</span>
-                                        <h3 class="card-title mb-2">$7,628</h3>
+                                        <span class="fw-medium d-block mb-1">Pengajuan Dalam Proses</span>
+                                        @php
+                                        $countProses = DB::table('pengajuan')
+                                            ->where('IsApproved', '=', '0')
+                                            ->where('IsDelete', '=', 0)
+                                            ->count();
+                                    @endphp
+                                    
+                                    <h3 class="card-title mb-2">{{ $countProses }}</h3>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +117,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block mb-1">Payments</span>
-                                        <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                                        <span class="d-block mb-1">Pengajuan Yang Sudah Di Setujui</span>
+                                        @php
+                                        $countSetuju = DB::table('pengajuan')
+                                            ->where('IsApproved','=','1')
+                                            ->where('IsDelete',0)
+
+                                            ->count();
+                                        @endphp
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countSetuju }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -130,8 +150,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Transactions</span>
-                                        <h3 class="card-title mb-2">$14,857</h3>
+                                        <span class="fw-medium d-block mb-1">Pengajuan Tidak Di Setujui</span>
+                                        @php
+                                        $countNot = DB::table('pengajuan')
+                                            ->where('IsApproved', '=', '2')
+                                            ->where('IsDelete', '=', 0)
+                                            ->count();
+                                    @endphp
+                                    
+                                    <h3 class="card-title text-nowrap mb-2">{{ $countNot }}</h3>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +196,7 @@
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
                                                                         Menunggu di setujui
-                                                                    @elseif($da->IsAproved == 1)
+                                                                    @elseif($da->IsApproved == 1)
                                                                         Sudah di setujui
                                                                     @else
                                                                         Tidak disetujui
