@@ -59,6 +59,9 @@ Route::get('/lihat', function () {
 Route::get('/user',[user_pageController::class, 'index'])->name('user.index');
 Route::get('/user/pengajuan',[user_pageController::class, 'create'])->name('user.create');
 Route::post('/user/pengajuan',[user_pageController::class, 'store'])->name('user.store');
+Route::get('/user/pengajuan/{id}',[user_pageController::class, 'destroy'])->name('user.destroy');
+Route::get('/user/pengajuan/edit/{id}',[user_pageController::class, 'edit'])->name('user.edit');
+Route::put('/user/pengajuan/{id}', [user_pageController::class, 'update'])->name('user.update');
 
 Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
 Route::get('/lihatuser/{id}',[user_pageController::class,"detailUser"])->name('user.detail');

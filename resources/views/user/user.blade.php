@@ -17,14 +17,14 @@
                                                 @php
                                                     $adminUser = \App\Models\User::where('user_type', 'user')->first();
                                                 @endphp
-                                                    <h2 class="card-title">
-                                                        @if($adminUser)
-                                                            Selamat Datang, {{ $adminUser->username }} di DFUNDS
-                                                        @else
-                                                            Selamat Datang di DFUNDS
-                                                        @endif
-                                                    </h2>
-                                              </div>
+                                                <h2 class="card-title">
+                                                    @if ($adminUser)
+                                                        Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                    @else
+                                                        Selamat Datang di DFUNDS
+                                                    @endif
+                                                </h2>
+                                            </div>
                                             <img src="../assets/img/illustrations/man-with-laptop-light.png"
                                                 alt="Welcome Image" width="160">
                                         </div>
@@ -153,18 +153,40 @@
                                                             Tentang</th>
                                                         <th class="text-center" id="headr">Kategori
                                                         </th>
+                                                        <th class="text-center" id="headr">Status
+                                                        </th>
                                                         <th class="text-center" id="headr">Opsi
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($data as $da)
-                                        <tr>
-                                            <td>{{ $da->tentang }}</td>
-                                            <td>{{ $da->nama_kategori }}</td>
-                                            <td class="text-center"><a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}" class="btn btn-primary">Diskusi</a></td>
-                                        </tr>
-                                    @endforeach
+                                                        @if ($da->IsDelete == 0)
+                                                            <tr>
+                                                                <td>{{ $da->tentang }}</td>
+                                                                <td>{{ $da->nama_kategori }}</td>
+                                                                <td>
+                                                                    @if ($da->IsApproved == 0)
+                                                                        Menunggu di setujui
+                                                                    @elseif($da->IsAproved == 1)
+                                                                        Sudah di setujui
+                                                                    @else
+                                                                        Tidak disetujui
+                                                                    @endif
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-primary">Diskusi</a>
+
+                                                                    <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-warning">Edit</a>
+
+                                                                    <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-danger">Hapus</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
 
                                                 </tbody>
                                             </table>

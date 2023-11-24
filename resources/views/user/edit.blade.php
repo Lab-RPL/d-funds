@@ -15,31 +15,35 @@
 
                                         <div class="form-container">
                                             <h2>Form Pengajuan Draf</h2>
-                                            <form action="{{ route('user.store') }}" method="POST"
+                                            <form action="{{ route('user.update', $pengajuan->id_pengajuan) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
+                                                @method('PUT')
                                                 <div class="form-group">
                                                     <label for="tentang">Tentang</label>
-                                                    <textarea class="form-control" id="tentang" name="tentang"></textarea>
+                                                    <textarea class="form-control" id="tentang" name="tentang">{{ $pengajuan->tentang }}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="unit_kerja">Unit Kerja</label>
-                                                    <input type="text" id="unit_kerja" name="unit_kerja" required>
+                                                    <input type="text" id="unit_kerja" name="unit_kerja" required
+                                                        value={{ $pengajuan->unit_kerja }}>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="catatan">Catatan</label>
-                                                    <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                    <textarea class="form-control" id="catatan" name="catatan">{{ $pengajuan->catatan }}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_kategori">Kategori</label>
                                                     <select class="form-select" id="id_kategori" name="id_kategori">
                                                         <option value="" disabled selected hidden>Pilih Kategori
                                                         </option>
-                                                        @foreach ($kategoris as $kategori)
-                                                            <option value="{{ $kategori->id_kategori }}">
-                                                                {{ $kategori->nama_kategori }}</option>
+                                                        @foreach ($kategoris as $kategoriItem)
+                                                            <option value="{{ $kategoriItem->id_kategori }}"
+                                                                {{ $kategori->id_kategori == $kategoriItem->id_kategori ? 'selected' : '' }}>
+                                                                {{ $kategoriItem->nama_kategori }}</option>
                                                         @endforeach
                                                     </select>
+
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="obj_pembayaran">Objek Pembayaran</label>
@@ -55,9 +59,9 @@
                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                                                 <script type="text/javascript">
                                                     $(document).ready(function() {
-                                                        $('#id_kategori').change(function() {
-                                                            var id_kategori = $(this).val();
 
+                                                        // Fungsi untuk melakukan AJAX request
+                                                        function fetchKategoriData(id_kategori) {
                                                             $.ajax({
                                                                 url: '/kategori/' + id_kategori,
                                                                 type: 'get',
@@ -76,8 +80,19 @@
                                                                     });
                                                                 }
                                                             });
+                                                        }
 
+                                                        // Mengambil kategori ketika ada perubahan pada dropdown
+                                                        $('#id_kategori').change(function() {
+                                                            var id_kategori = $(this).val();
+                                                            fetchKategoriData(id_kategori);
                                                         });
+
+                                                        // Mengambil kategori ketika halaman dimuat
+                                                        var initial_kategori_id = $('#id_kategori').val();
+                                                        if (initial_kategori_id !== "") { // Hanya jika ada kategori terpilih
+                                                            fetchKategoriData(initial_kategori_id);
+                                                        }
                                                     });
                                                 </script>
 
@@ -116,13 +131,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach ($dokumens as $dokumen)
                                                         <tr>
-                                                            <td><input type="text" class="file-name"
-                                                                    name="nama_dokumen[]" style="height: 35px;" required>
+                                                            <td><input type="text" class="file-name" name="nama_dokumen[]" value="{{ $dokumen->nama_dokumen }}" style="height: 35px;" required></td>
+                                                            <td>
+                                                                <input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" multiple value="">
+                                                                @if (!empty($dokumen->nama_file))
+                                                                    <p class="text-info">File sebelumnya: {{ $dokumen->nama_file }}</p>
+                                                                @endif
                                                             </td>
-                                                            <td><input type="file" class="file-input" name="nama_file[]"
-                                                                    accept=".pdf, .doc, .jpeg, .jpg, .png" required></td>
                                                         </tr>
+                                                        @endforeach
+                                                        
+                                                    
                                                     </tbody>
                                                 </table>
                                                 <div class="form-group">
@@ -153,7 +174,7 @@
             function addRow() {
                 var newRow = '<tr>' +
                     '<td><input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required></td>' +
-                    '<td><input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" required></td>' +
+                    '<td><input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" required multiple></td>' +
                     '</tr>';
                 $('#document-table tbody').append(newRow);
             }

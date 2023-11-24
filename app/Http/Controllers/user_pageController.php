@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\discuss;
 use App\Models\dokumen;
+use App\Models\kategori;
 use App\Models\pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,10 +41,10 @@ class user_pageController extends Controller
             ->where('id_pengajuan', $id)
             ->get();
 
-            $discusses = DB::table('discuss')
+        $discusses = DB::table('discuss')
             ->join('users', 'discuss.id_user', '=', 'users.id_user')
             ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
-            ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc') 
+            ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc')
             ->where('discuss.id_pengajuan', $id)
             ->get();
 
@@ -61,7 +62,7 @@ class user_pageController extends Controller
     }
 
     public function create()
-    {   
+    {
         $kategoris = DB::table('kategori')->get();
 
         return view('user.pengajuan', compact('kategoris'));
@@ -110,67 +111,60 @@ class user_pageController extends Controller
             $dokumen->save();
         }
 
-        // $nama_dokumens = $request->nama_dokumen;
-        // $files = $request->file('file');
-
-        // for ($i = 0; $i < count($nama_dokumens); $i++) {
-        //     $file = $files[$i];
-        //     // Get the file's original extension and generate a new unique name for it
-        //     $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-        //     $filePath = 'app/public/dokumen/' . $fileName;
-
-        //     // Move file to storage
-        //     $file->move(storage_path('app/public/dokumen'), $fileName);
-
-        //     dokumen::create([
-        //         'id_pengajuan' => $pengajuan->id_pengajuan,
-        //         'nama_dokumen' => $nama_dokumens[$i],
-        //         'nama_file' => $filePath,
-        //     ]);
-        // }
-
-        //Menyimpan data dokumen dengan id_pengajuan
-        // $nama_dokumens = $request->nama_dokumen;
-        // $docs = $request->file('file'); // "file" should be a name of input field in the form
-
-        // // Check if $nama_dokumens is an array
-        // if (!is_array($nama_dokumens)) {
-        //     // If not, convert it to an array
-        //     $nama_dokumens = [$nama_dokumens];
-        // }
-
-        // // Check if $docs is an array
-        // if (!is_array($docs)) {
-        //     // If not, convert it to an array
-        //     $docs = [$docs];
-        // }
-
-        // for ($i = 0; $i < count($nama_dokumens); $i++) {
-        //     // You should make sure there is a file associated with this document name
-        //     if (!isset($docs[$i])) {
-        //         continue;
-        //     }
-
-        //     $file = $docs[$i];
-
-        //     // Make sure $file is an instance of UploadedFile.
-        //     if (!($file instanceof \Illuminate\Http\UploadedFile)) {
-        //         continue; // or throw an exception
-        //     }
-
-        //     $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-        //     $folder = storage_path('app/public/dokumen');
-        //     $file->move($folder, $fileName);
-
-        //     dokumen::create([
-        //         'id_pengajuan' => $pengajuan->id_pengajuan,
-        //         'nama_dokumen' => $nama_dokumens[$i],
-        //         'nama_file' => $fileName,
-        //     ]);
-        // }
-
         return redirect()->route('user.index');
     }
+
+    public function edit($id)
+    {
+        $pengajuan = Pengajuan::find($id);
+        $kategori = kategori::find($pengajuan->id_kategori);
+        $kategoris = kategori::all();
+        $dokumens = Dokumen::where('id_pengajuan', $id)->get();
+
+        return view('user.edit', compact('pengajuan', 'kategoris', 'kategori', 'dokumens'));
+    }
+
+    public function update(Request $request, $id)
+{
+    $pengajuan = Pengajuan::find($id);
+    $pengajuan->update([
+        'tentang' => $request->tentang,
+        'unit_kerja' => $request->unit_kerja,
+        'catatan' => $request->catatan,
+        'id_kategori' => $request->id_kategori,
+        'obj_pembayaran' => $request->obj_pembayaran,
+        'deskripsi' => $request->deskripsi,
+    ]);
+
+    // Only process documents if there are new ones provided
+    if ($request->has('nama_dokumen') || $request->hasFile('nama_file')) {
+        
+        $files = $request->file('nama_file');
+        $documents = $request->get('nama_dokumen');
+
+        $fileCount = $files ? count($files) : 0;
+
+        for ($i = 0; $i < $fileCount; $i++) {
+            $dokumen = new Dokumen();
+            $dokumen->id_pengajuan = $pengajuan->id_pengajuan;
+            $dokumen->nama_dokumen = isset($documents[$i]) ? $documents[$i] : null;
+
+            if (isset($files[$i])) {
+                $file = $files[$i];
+                $fileName = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('public/suratna', $fileName);
+                $dokumen->nama_file = $fileName;
+            } else {
+                $dokumen->nama_file = null; //example default value
+            }
+
+            $dokumen->save();
+        }
+    }
+    return redirect()->route('user.index');
+}
+
+    
 
     public function storeDiscuss(Request $request)
     {
@@ -214,6 +208,29 @@ class user_pageController extends Controller
             ->back()
             ->with('message', 'Discussion added successfully!');
     }
+
+    public function destroy($id)
+    {
+        // Find the pengajuan
+        $pengajuan = pengajuan::find($id);
+
+        // If we didn't find a valid pengajuan, then redirect (or error, etc.)
+        if (!$pengajuan) {
+            return redirect()
+                ->back()
+                ->with('error', 'Invalid pengajuan ID');
+        }
+
+        // We found the pengajuan, so 'delete' it and then redirect (or whatever you want to do)
+        $pengajuan->IsDelete = 1;
+        $pengajuan->save();
+
+        // Redirect (or whatever you'd like to do after 'deleting' the pengajuan)
+        return redirect()
+            ->back()
+            ->with('success', 'Pengajuan deleted successfully');
+    }
+
     public function download($id_dokumen)
     {
         try {
