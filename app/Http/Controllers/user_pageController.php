@@ -41,12 +41,14 @@ class user_pageController extends Controller
             ->where('id_pengajuan', $id)
             ->get();
 
-        $discusses = DB::table('discuss')
+            $discusses = DB::table('discuss')
             ->join('users', 'discuss.id_user', '=', 'users.id_user')
             ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
             ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc')
             ->where('discuss.id_pengajuan', $id)
+            ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
+
 
         return view('user.lihatuser', compact('data', 'dokumens', 'discusses'));
     }
