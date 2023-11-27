@@ -25,7 +25,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="unit_kerja">Unit Kerja</label>
-                                                    <input type="text" id="unit_kerja" name="unit_kerja" required
+                                                    <input type="text" id="unit_kerja" name="unit_kerja"
                                                         value={{ $pengajuan->unit_kerja }}>
                                                 </div>
                                                 <div class="form-group">
