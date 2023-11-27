@@ -108,7 +108,7 @@
                                                             </a>
                                                         @endif
                                                         <br>
-                                                        <small>{{ $discuss->created_at}}</small>
+                                                        <small>{{ \Carbon\Carbon::parse($discuss->created_at)->translatedFormat('l, d F Y H:i:s') }}</small>
                                                     </li>
                                                 @endforeach
                                             </ul>
