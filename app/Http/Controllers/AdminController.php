@@ -10,15 +10,17 @@ class AdminController extends Controller
 {
     //
     public function index(Request $req){
-        if(!$req->session()->has('user_id')){
-            return redirect('/');
+        if (!$req->session()->has('user_id') || $req->session()->get('user_type') !== 'admin') {
+            // Redirect jika tidak ada sesi user_id atau user_type bukan admin
+            return redirect('404')->with('error', 'Anda tidak diizinkan untuk mengakses halaman ini.');
         }
-
-        $data = admin::where('IsDelete',0)->paginate(100000000);
-
-        return view('admin.index',compact('data'));
+    
+        $data = admin::where('IsDelete', 0)->paginate(100000000);
+    
+        return view('admin.index', compact('data'));
     }
-
+    
+    
     public function create()
 {
     return view('admin.index');
