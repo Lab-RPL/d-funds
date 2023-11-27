@@ -13,8 +13,8 @@ class user_pageController extends Controller
 {
     public function index(Request $req)
     {
-        if (!$req->session()->has('user_id')) {
-            return redirect('/');
+        if (!$req->session()->has('user_id')|| $req->session()->get('user_type') !== 'user') {
+            return redirect('404');
         }
 
         $data = DB::table('pengajuan')
