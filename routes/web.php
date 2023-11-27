@@ -36,8 +36,11 @@ Route::put('/dashboard/update/{id_user}',[AdminController::class,'update'])->nam
 // KOUR
 Route::get('/kour',[kourController::class,'index'])->name('kour.index');
 Route::get('/kour-discuss/{id}',[kourController::class,'discussion'])->name('kour.discuss');
-Route::post('/kour-discuss-store', [user_pageController::class, "storeDiscuss"])->name('kour.store_discuss');
-Route::get('/kour-discuss/{id}/download', [user_pageController::class, 'download'])->name('kour.download');
+Route::post('/kour-discuss-store', [kourController::class, "storeDiscuss"])->name('kour.store_discuss');
+Route::get('/kour-discuss/{id}/download', [kourController::class, 'download'])->name('kour.download');
+Route::get('/perijinan/{id}', [kourController::class,'showPerijinan'])->name('perijinan.show');
+Route::post('/perijinan/{id}',[kourController::class,'processPerijinan'])->name('perijinan.process');
+
 
 // PEJABAT
 Route::get('/pejabat', function () {

@@ -12,8 +12,8 @@ class kourController extends Controller
 {
     public function index(Request $req)
     {
-        if (!$req->session()->has('user_id')) {
-            return redirect('/');
+        if (!$req->session()->has('user_id') ||  $req->session()->get('user_type') !== 'kour') {
+            return redirect('404');
         }
 
         $data = DB::table('pengajuan')
@@ -39,12 +39,14 @@ class kourController extends Controller
             ->where('id_pengajuan', $id)
             ->get();
 
-        $discusses = DB::table('discuss')
+            $discusses = DB::table('discuss')
             ->join('users', 'discuss.id_user', '=', 'users.id_user')
             ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
             ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc')
             ->where('discuss.id_pengajuan', $id)
+            ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
+
 
         return view('kour.lihatkour', compact('data', 'dokumens', 'discusses'));
     }
@@ -105,4 +107,34 @@ class kourController extends Controller
                 ->with('error', 'Surat not found.');
         }
     }
+    // KourController.php
+
+    public function showPerijinan($id)
+    {
+        return view('kour.perijinan', ['id_pengajuan' => $id]);
+    }
+
+    public function processPerijinan(Request $request, $id_pengajuan)
+    {
+        $status_perijinan = $request->input('status_perijinan');
+    
+        // Get the Pengajuan model instance based on $id_pengajuan
+        $pengajuan = Pengajuan::find($id_pengajuan);
+    
+        if (!$pengajuan) {
+            // Handle the case where Pengajuan is not found
+            return redirect()
+                ->route('kour.index')
+                ->with('error', 'Pengajuan not found');
+        }
+    
+        // Update 'IsApproved' based on the selected status
+        $pengajuan->IsApproved = $status_perijinan;
+        $pengajuan->save();
+    
+        return redirect()
+            ->route('kour.index')
+            ->with('message', 'Perijinan status updated successfully');
+    }
+    
 }
