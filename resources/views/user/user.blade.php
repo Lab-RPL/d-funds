@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Total Pengajuan</span>
+                                        <span class="fw-medium d-block mb-4">Total Pengajuan</span>
                                         @php
                                         $countPengajuan = DB::table('pengajuan')
                                             ->where('IsDelete',0)
@@ -84,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Pengajuan Dalam Proses</span>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Dalam Proses</span>
                                         @php
                                         $countProses = DB::table('pengajuan')
                                             ->where('IsApproved', '=', '0')
@@ -118,7 +118,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block mb-1">Pengajuan Yang Sudah Di Setujui</span>
+                                        <span class="d-block">Pengajuan Yang Sudah Di Setujui</span>
                                         @php
                                         $countSetuju = DB::table('pengajuan')
                                             ->where('IsApproved','=','1')
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-1">Pengajuan Tidak Di Setujui</span>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Tidak Di Setujui</span>
                                         @php
                                         $countNot = DB::table('pengajuan')
                                             ->where('IsApproved', '=', '2')
