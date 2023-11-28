@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\kourController;
+use App\Http\Controllers\pejabatController;
 use App\Http\Controllers\user_pageController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,12 +44,9 @@ Route::post('/perijinan/{id}',[kourController::class,'processPerijinan'])->name(
 
 
 // PEJABAT
-Route::get('/pejabat', function () {
-    return view('pejabat.pejabat');
-});
-Route::get('/lihatpejabat', function () {
-    return view('pejabat.lihatpejabat');
-});
+Route::get('/pejabat', [pejabatController::class, 'index'])->name('pejabat.index');
+Route::get('/pejabat-discuss/{id}', [pejabatController::class,'discussion'])->name('pejabat.discuss');
+Route::get('/pejabat-discuss/{id}/download', [pejabatController::class,'download'])->name('pejabat.download');
 
 // PELAKSANA
 Route::get('/pelaksana', function () {
@@ -65,13 +63,10 @@ Route::post('/user/pengajuan',[user_pageController::class, 'store'])->name('user
 Route::get('/user/pengajuan/{id}',[user_pageController::class, 'destroy'])->name('user.destroy');
 Route::get('/user/pengajuan/edit/{id}',[user_pageController::class, 'edit'])->name('user.edit');
 Route::put('/user/pengajuan/{id}', [user_pageController::class, 'update'])->name('user.update');
-
 Route::get('/kategori/{id_kategori}', [user_pageController::class, 'getKategoriDetail']);
 Route::get('/lihatuser/{id}',[user_pageController::class,"detailUser"])->name('user.detail');
 Route::post('/store-discuss', [user_pageController::class, "storeDiscuss"])->name('store.discuss');
 Route::get('/lihatuser/{id}/download', [user_pageController::class, 'download'])->name('surat.download');
-
-
 
 
 // Login
