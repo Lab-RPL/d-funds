@@ -62,7 +62,7 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item">
+      <li class="menu-item {{ Route::currentRouteName('/pelaksana') == '' ? 'active' : ''}}">
         <a href="/" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
@@ -71,7 +71,7 @@
 
       <!--Arsip Final-->
       <li class="menu-item">
-        <a href="/" class="menu-link">
+        <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Arsip Final</div>
         </a>
@@ -79,7 +79,7 @@
 
       <!--Arsip Batal-->
       <li class="menu-item">
-        <a href="/" class="menu-link">
+        <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Analytics">Arsip Batal</div>
         </a>
