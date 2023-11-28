@@ -62,7 +62,7 @@
 
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
-    <li class="menu-item {{ Route::currentRouteName() == 'user.index' || 'user.detail' ? 'active' : '' }}">
+    <li class="menu-item {{ in_array(Route::currentRouteName(), ['user.index', 'user.edit', 'user.detail']) ? 'active' : '' }}">
       <a href="{{ route('user.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
