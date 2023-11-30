@@ -1,8 +1,6 @@
 @extends('layouts.pelaksana-main')
 @section('content-pelaksana')
-
-
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -11,113 +9,169 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
 
-                          <div class="col-lg-12 col-md-12">
-                            <div class="card mb-3">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                  <div class="flex-grow-1">
-                                    @php
-                                        $adminUser = \App\Models\User::where('user_type', 'pelaksana')->first();
-                                    @endphp
-                                        <h2 class="card-title">
-                                            @if($adminUser)
-                                                Selamat Datang, {{ $adminUser->username }} di DFUNDS
-                                            @else
-                                                Selamat Datang di DFUNDS
-                                            @endif
-                                        </h2>
-                                  </div>
-                                  <img src="../assets/img/illustrations/man-with-laptop-light.png" alt="Welcome Image" width="160"> 
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                @php
+                                                    $adminUser = \App\Models\User::where('user_type', 'pelaksana')->first();
+                                                @endphp
+                                                <h2 class="card-title">
+                                                    @if ($adminUser)
+                                                        Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                    @else
+                                                        Selamat Datang di DFUNDS
+                                                    @endif
+                                                </h2>
+                                            </div>
+                                            <img src="../assets/img/illustrations/man-with-laptop-light.png"
+                                                alt="Welcome Image" width="160">
+                                        </div>
+                                        <!-- Card content here -->
+                                    </div>
                                 </div>
-                                <!-- Card content here -->
-                              </div>
                             </div>
-                          </div>
-                          
-                           
+
+                            <!-- Card pertama - Profit -->
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Total Pengajuan Yang Sudah Disetujui</span>
+                                        @php
+                                            $countPengajuan = DB::table('pengajuan')
+                                                ->where('IsDelete', 0)
+                                                ->count();
+                                        @endphp
+                                        <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card kedua - Sales -->
+                            {{-- <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/wallet-info.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Dalam Proses</span>
+                                        @php
+                                            $countProses = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '0')
+                                                ->where('IsDelete', '=', 0)
+                                                ->count();
+                                        @endphp
+
+                                        <h3 class="card-title mb-2">{{ $countProses }}</h3>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card ketiga - Payments -->
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt4"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="d-block mb-4">Pengajuan Yang Sudah Disetujui</span>
+                                        @php
+                                            $countSetuju = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '1')
+                                                ->where('IsDelete', 0)
+
+                                                ->count();
+                                        @endphp
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countSetuju }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card keempat - Transactions -->
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt1"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Tidak Disetujui</span>
+                                        @php
+                                            $countNot = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '2')
+                                                ->where('IsDelete', '=', 0)
+                                                ->count();
+                                        @endphp
+
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countNot }}</h3>
+
+                                    </div>
+                                </div>
+                            </div> --}}
+
 
                             <!-- Tabel Data -->
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
-                                    <div class="card-body"> <!-- Tombol Tambah -->
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                                            data-bs-target="#userModal">Tambah</button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="userModal" tabindex="-1" role="dialog"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="userModalLabel">Tambah Data User</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        <!-- Your form goes here -->
-                                                        <form method="post">
-                                                            @csrf
-
-                                                            <div class="mb-3">
-                                                                <label for="username" class="form-label">Username</label>
-                                                                <input type="text" class="form-control" id="username"
-                                                                    name="username" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="password" class="form-label">Password</label>
-                                                                <div style="position:relative;">
-                                                                    <input id="password" type="password" class="form-control" name="password" required>
-                                                                    <i id="togglePassword" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</i>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            
-                                                            <script>
-                                                                const togglePassword = document.querySelector('#togglePassword');
-                                                                const password = document.querySelector('#password');
-                                                            
-                                                                togglePassword.addEventListener('click', function (e) {
-                                                                    // toggle the type attribute
-                                                                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                                                                    password.setAttribute('type', type);
-                                                                    // toggle the eye slash icon
-                                                                    this.textContent = this.textContent === '👁️' ? '👁️‍🗨️' : '👁️';
-                                                                });
-                                                            </script>
-                                                            
-                                                            <div class="mb-3">
-                                                                <label for="user_type" class="form-label">Role</label>
-                                                                <select class="form-select" id="user_type"
-                                                                    name="user_type" required>
-                                                                    <option selected disabled hidden value="">
-                                                                        Choose...</option>
-                                                                    <option value="kour">Kour</option>
-                                                                    <option value="pejabat">Pejabat</option>
-                                                                    <option value="user">User</option>
-                                                                    <option value="pelaksana">Pelaksana</option>
-                                                                </select>
-                                                            </div>
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Tambah
-                                                                Data</button>
-                                                        </form>
-
-                                                    </div>
-                                                    <div class="modal-footer">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
+                                    <div class="card-body">
                                         <!-- Formulir dengan Tabel -->
                                         <form>
-
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -125,32 +179,32 @@
                                                         <th class="text-center" id="headr">Tanggal Pengajuan</th>
                                                         <th class="text-center" id="headr">Kategori</th>
                                                         <th class="text-center" id="headr">Unit Kerja</th>
-                                                        <th class="text-center" id="headr">Berkas pendukung</th>
                                                         <th class="text-center" id="headr">Opsi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td class="text-center">
-                                                                <a href="/lihat" class="btn btn-primary">Lihat</a>
-                                                        </td>
-                                                    </tr>
-
+                                                    @foreach ($data as $da)
+                                                        @if ($da->IsDelete == 0)
+                                                            <tr>
+                                                                <td>{{ $da->tentang }}</td>
+                                                                <td>{{ $da->created_at }}</td>
+                                                                <td>{{ $da->nama_kategori }}</td>
+                                                                <td>{{ $da->unit_kerja }}</td>                                                               
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('pelaksana.discuss', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-primary">Diskusi</a>
+                                                                    {{-- <ahref="route('perijinan.show',['id'=>$da->id_pengajuan])"
+                                                                        class="btn btn-success">Perijinan</a> --}}
+                                                                </td>
+                                                        @endif
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
-
-
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                           
-
                         </div>
                     </div>
                 </div>
@@ -159,7 +213,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
@@ -172,5 +226,4 @@
             pageLength: 5 // Menampilkan 5 data per halaman
         });
     </script>
- 
 @endsection

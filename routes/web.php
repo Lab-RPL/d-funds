@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\kourController;
 use App\Http\Controllers\pejabatController;
+use App\Http\Controllers\pelaksanaController;
 use App\Http\Controllers\user_pageController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +50,10 @@ Route::get('/pejabat-discuss/{id}', [pejabatController::class,'discussion'])->na
 Route::get('/pejabat-discuss/{id}/download', [pejabatController::class,'download'])->name('pejabat.download');
 
 // PELAKSANA
-Route::get('/pelaksana', function () {
-    return view('pelaksana.pelaksana');
-});
-Route::get('/lihat', function () {
-    return view('pelaksana.lihatpelaksana');
-});
+Route::get('/pelaksana', [pelaksanaController::class, 'index'])->name('pelaksana.index');
+Route::get('/pelasana-discuss/{id}', [pelaksanaController::class, 'discussion'])->name('pelaksana.discuss');
+Route::post('/pelaksana-discuss-store', [pelaksanaController::class, 'storeDiscuss'])->name('pelaksana.store_discuss');
+Route::get('/pelaksana-discuss/{id}/download', [pelaksanaController::class, 'download'])->name('pelaksana.download');
 
 // User
 Route::get('/user',[user_pageController::class, 'index'])->name('user.index');
