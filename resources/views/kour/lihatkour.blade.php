@@ -97,7 +97,7 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/user"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
+                                            <a href="/kour"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
                                         </div>
                                         
                                         <!-- Form untuk menambahkan komentar -->

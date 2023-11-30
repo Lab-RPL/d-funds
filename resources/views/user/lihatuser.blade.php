@@ -97,23 +97,30 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/user"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
+                                            
                                         </div>
                                         
                                         <!-- Form untuk menambahkan komentar -->
                                         <form action="{{ route('store.discuss') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                          
                                             <div class="mb-3">
-                                                <label for="comment" class="form-label">Tambahkan Komentar:</label>
-                                                <textarea class="form-control" id="comment" rows="3" name="Komentar"></textarea>
+                                              <label for="comment" class="form-label">Tambahkan Komentar:</label>
+                                              <textarea class="form-control" id="comment" rows="3" name="Komentar"></textarea>
                                             </div>
+                                          
                                             <input type="hidden" name="id_pengajuan" value="{{ $data->id_pengajuan }}" />
+                                          
                                             <div class="mb-3">
-                                                <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
-                                                <input type="file" class="form-control" id="uploadFile" name="file[]">
+                                              <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
+                                              <input type="file" class="form-control" id="uploadFile" name="file[]" multiple>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Kirim</button>
-                                        </form>
+                                          
+                                            <div class="d-flex justify-content-between">
+                                              <button type="submit" class="btn btn-primary">Kirim</button>
+                                              <a href="{{ route('user.index') }}" class="btn btn-primary" target="_self">Kembali</a>
+                                            </div>
+                                          </form>
 
                                        
                                         
