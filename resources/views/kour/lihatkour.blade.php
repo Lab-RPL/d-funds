@@ -77,22 +77,7 @@
                                 <div class="card">
                                     <h5 class="card-header bg-primary text-white">Diskusi</h5>
                                     <div class="card-body">
-                                        <!-- Form untuk menambahkan komentar -->
-                                        <form action="{{ route('kour.store_discuss') }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="mb-3">
-                                                <label for="comment" class="form-label">Tambahkan Komentar:</label>
-                                                <textarea class="form-control" id="comment" rows="3" name="Komentar"></textarea>
-                                            </div>
-                                            <input type="hidden" name="id_pengajuan" value="{{ $data->id_pengajuan }}" />
-                                            <div class="mb-3">
-                                                <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
-                                                <input type="file" class="form-control" id="uploadFile" name="file[]">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Kirim</button>
-                                        </form>
-
-                                        <!-- Daftar komentar -->
+                                         <!-- Daftar komentar -->
                                         <div class="mt-4">
                                             <h6>Komentar Sebelumnya:</h6>
                                             <ul class="list-group">
@@ -112,8 +97,25 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/kour"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
+                                            <a href="/user"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
                                         </div>
+                                        
+                                        <!-- Form untuk menambahkan komentar -->
+                                        <form action="{{ route('store.discuss') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="comment" class="form-label">Tambahkan Komentar:</label>
+                                                <textarea class="form-control" id="comment" rows="3" name="Komentar"></textarea>
+                                            </div>
+                                            <input type="hidden" name="id_pengajuan" value="{{ $data->id_pengajuan }}" />
+                                            <div class="mb-3">
+                                                <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
+                                                <input type="file" class="form-control" id="uploadFile" name="file[]">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                        </form>
+
+                                       
                                         
                                         
                                     </div>
