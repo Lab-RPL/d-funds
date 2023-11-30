@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
 
+
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <div class="layout-page">
@@ -59,6 +60,7 @@
                                             $countPengajuan = DB::table('pengajuan')
                                                 ->where('IsDelete', 0)
                                                 ->count();
+
                                         @endphp
                                         <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
                                     </div>
@@ -119,13 +121,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block ">Pengajuan Yang Sudah Disetujui</span>
+                                        <span class="d-block mb-1">Pengajuan Yang Sudah Di Setujui</span>
                                         @php
-                                            $countSetuju = DB::table('pengajuan')
-                                                ->where('IsApproved', '=', '1')
-                                                ->where('IsDelete', 0)
+                                        $countSetuju = DB::table('pengajuan')
+                                            ->where('IsApproved','=','1')
+                                            ->where('IsDelete',0)
 
-                                                ->count();
+                                            ->count();
                                         @endphp
                                         <h3 class="card-title text-nowrap mb-2">{{ $countSetuju }}</h3>
                                     </div>
@@ -161,7 +163,6 @@
                                         @endphp
 
                                         <h3 class="card-title text-nowrap mb-2">{{ $countNot }}</h3>
-
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +186,6 @@
                                                     }, 3000);
                                                 </script>
                                             @endif
-
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -226,7 +226,7 @@
                                                         @endif
                                                         </tr>
                                                     @endforeach
-
+                                                        
                                                 </tbody>
                                             </table>
                                         </form>
