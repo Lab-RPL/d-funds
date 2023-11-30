@@ -51,7 +51,7 @@ Route::get('/pejabat-discuss/{id}/download', [pejabatController::class,'download
 
 // PELAKSANA
 Route::get('/pelaksana', [pelaksanaController::class, 'index'])->name('pelaksana.index');
-Route::get('/pelasana-discuss/{id}', [pelaksanaController::class, 'discussion'])->name('pelaksana.discuss');
+Route::get('/pelaksana-discuss/{id}', [pelaksanaController::class, 'discussion'])->name('pelaksana.discuss');
 Route::post('/pelaksana-discuss-store', [pelaksanaController::class, 'storeDiscuss'])->name('pelaksana.store_discuss');
 Route::get('/pelaksana-discuss/{id}/download', [pelaksanaController::class, 'download'])->name('pelaksana.download');
 

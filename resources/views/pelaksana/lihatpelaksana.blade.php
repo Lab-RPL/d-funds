@@ -62,7 +62,7 @@
                                                 <tr>
                                                     @endif
                                                     <td><a target="_blank"
-                                                            href="{{ route('kour.download', $dokumen->id_dokumen) }}">{{ $dokumen->nama_dokumen }}</a>
+                                                            href="{{ route('pelaksana.download', $dokumen->id_dokumen) }}">{{ $dokumen->nama_dokumen }}</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -105,7 +105,7 @@
                                         </div>
 
                                         <!-- Form untuk menambahkan komentar -->
-                                        <form action="{{ route('store.discuss') }}" method="POST"
+                                        <form action="{{ route('pelaksana.store_discuss') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3">
