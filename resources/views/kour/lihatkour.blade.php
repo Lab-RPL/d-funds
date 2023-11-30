@@ -97,7 +97,6 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/kour"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
                                         </div>
                                         
                                         <!-- Form untuk menambahkan komentar -->
@@ -108,11 +107,16 @@
                                                 <textarea class="form-control" id="comment" rows="3" name="Komentar"></textarea>
                                             </div>
                                             <input type="hidden" name="id_pengajuan" value="{{ $data->id_pengajuan }}" />
+
                                             <div class="mb-3">
                                                 <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
                                                 <input type="file" class="form-control" id="uploadFile" name="file[]">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Kirim</button>
+
+                                            <div class="d-flex justify-content-between">
+                                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                                <a href="{{ route('kour.index') }}" class="btn btn-primary" target="_self">Kembali</a>
+                                            </div>
                                         </form>
 
                                        
