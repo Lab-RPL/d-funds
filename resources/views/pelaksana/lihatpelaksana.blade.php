@@ -100,8 +100,6 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/pelaksana"><button type="submit"
-                                                    class="btn btn-primary mt-3">Kembali</button></a>
                                         </div>
 
                                         <!-- Form untuk menambahkan komentar -->
@@ -117,7 +115,10 @@
                                                 <label for="uploadFile" class="form-label">Unggah Dokumen:</label>
                                                 <input type="file" class="form-control" id="uploadFile" name="file[]">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                            <div class="d-flex justify-content-between">
+                                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                                <a href="{{ route('pelaksana.index') }}" class="btn btn-primary" target="_self">Kembali</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
