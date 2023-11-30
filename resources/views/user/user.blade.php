@@ -118,7 +118,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block">Pengajuan Yang Sudah Disetujui</span>
+                                        <span class="d-block mb-4">Pengajuan Yang Sudah Disetujui</span>
                                         @php
                                         $countSetuju = DB::table('pengajuan')
                                             ->where('IsApproved','=','1')
