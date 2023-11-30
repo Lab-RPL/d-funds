@@ -121,13 +121,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="d-block mb-1">Pengajuan Yang Sudah Di Setujui</span>
+                                        <span class="d-block mb-1">Pengajuan Yang Sudah Disetujui</span>
                                         @php
-                                        $countSetuju = DB::table('pengajuan')
-                                            ->where('IsApproved','=','1')
-                                            ->where('IsDelete',0)
+                                            $countSetuju = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '1')
+                                                ->where('IsDelete', 0)
 
-                                            ->count();
+                                                ->count();
                                         @endphp
                                         <h3 class="card-title text-nowrap mb-2">{{ $countSetuju }}</h3>
                                     </div>
@@ -207,10 +207,11 @@
                                                                 <td>{{ $da->unit_kerja }}</td>
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
-                                                                    <i class="fa-regular fa-clock text-primary"></i>
+                                                                        <i class="fa-regular fa-clock text-primary"></i>
                                                                         Menunggu Disetujui
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i> Sudah Disetujui
+                                                                        <i class="fas fa-check text-success"></i> Sudah
+                                                                        Disetujui
                                                                     @else
                                                                         <i class="fas fa-times text-danger"></i> Tidak
                                                                         Disetujui
@@ -226,7 +227,7 @@
                                                         @endif
                                                         </tr>
                                                     @endforeach
-                                                        
+
                                                 </tbody>
                                             </table>
                                         </form>
