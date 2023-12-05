@@ -136,5 +136,27 @@ class kourController extends Controller
             ->route('kour.index')
             ->with('message', 'Perijinan status updated successfully');
     }
+
+    public function approveAction(Request $request)
+    {
+        $validatedData = $request->validate([
+            'approvalStatus' => 'required|in:1,2', // Assuming the approval status can only be 1 or 2
+            'id_pengajuan' => 'required|exists:pengajuan,id_pengajuan', // Validate that the id_pengajuan exists in the Pengajuan table
+        ]);
+
+        $approvalStatus = $validatedData['approvalStatus'];
+        $idPengajuan = $validatedData['id_pengajuan'];
+
+        // Update the Pengajuan record based on the approval status
+        $pengajuan = Pengajuan::find($idPengajuan);
+        if ($pengajuan) {
+            $pengajuan->IsApproved = $approvalStatus;
+            $pengajuan->save();
+
+            return redirect()->back()->with('message', 'Status Perijinan Berhasil Diperbaharui');
+        }
+
+        return redirect()->back()->with('error', 'Pengajuan tidak ditemukan.');
+    }
     
 }

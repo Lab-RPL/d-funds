@@ -42,6 +42,7 @@ Route::post('/kour-discuss-store', [kourController::class, "storeDiscuss"])->nam
 Route::get('/kour-discuss/{id}/download', [kourController::class, 'download'])->name('kour.download');
 Route::get('/perijinan/{id}', [kourController::class,'showPerijinan'])->name('perijinan.show');
 Route::post('/perijinan/{id}',[kourController::class,'processPerijinan'])->name('perijinan.process');
+Route::post('/approve-action', [kourController::class, 'approveAction'])->name('approveAction');
 
 
 // PEJABAT

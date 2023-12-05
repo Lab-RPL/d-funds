@@ -167,6 +167,59 @@
                                 </div>
                             </div>
 
+                            <!-- Modal -->
+                            <div class="modal fade" id="approvalModal" tabindex="-1" role="dialog"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="approvalModal">Persetujuan Pengajuan</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <!-- Your form goes here -->
+                                            <form action="{{ route('approveAction') }}" method="post">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <label for="approvalStatus" class="form-label">Persetujuan</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="approvalStatus" id="setujui" value="1" required>
+                                                        <label class="form-check-label" for="setujui">
+                                                            Disetujui
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="approvalStatus" id="tidakSetujui" value="2"
+                                                            required>
+                                                        <label class="form-check-label" for="tidakSetujui">
+                                                            Tidak Disetujui
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Use the hidden field to store the id_pengajuan -->
+                                                <input type="hidden" name="id_pengajuan" id="approvalId">
+
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <!-- Footer content goes here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
                             <!-- Tabel Data -->
                             <div class="col-lg-12 col-md-12">
@@ -178,13 +231,6 @@
                                                 <div id="pesan-sukses" class="alert alert-success mt-4">
                                                     {{ Session::get('message') }}
                                                 </div>
-
-                                                <script>
-                                                    // Use setTimeout to hide the message after 3000 milliseconds (3 seconds)
-                                                    setTimeout(function() {
-                                                        document.getElementById('pesan-sukses').style.display = 'none';
-                                                    }, 3000);
-                                                </script>
                                             @endif
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
@@ -221,13 +267,12 @@
                                                                 <td class="text-center btn-group">
                                                                     <a href="{{ route('kour.discuss', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>
-                                                                    <a href="{{ route('perijinan.show', ['id' => $da->id_pengajuan]) }}"
-                                                                        class="btn btn-success">Perijinan</a>
+                                                                    <button class="btn btn-success btn-approval"
+                                                                        data-id="{{ $da->id_pengajuan }}">Persetujuan</button>
                                                                 </td>
                                                         @endif
                                                         </tr>
                                                     @endforeach
-
                                                 </tbody>
                                             </table>
                                         </form>
@@ -253,6 +298,20 @@
             ],
 
             pageLength: 5 // Menampilkan 5 data per halaman
+        });
+
+        setTimeout(function() {
+            document.getElementById('pesan-sukses').style.display = 'none';
+        }, 3000);
+
+        $(document).ready(function() {
+            // Function to handle the approval modal
+            $('.btn-approval').click(function(e) {
+                var pengajuanId = $(this).data('id');
+                $('#approvalId').val(pengajuanId);
+                $('#approvalModal').modal('show');
+                e.preventDefault();
+            });
         });
     </script>
 @endsection
