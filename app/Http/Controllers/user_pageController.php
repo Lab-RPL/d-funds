@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
+use App\Models\log;
 use App\Models\discuss;
 use App\Models\dokumen;
 use App\Models\kategori;
 use App\Models\pengajuan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,7 +52,10 @@ class user_pageController extends Controller
             ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
 
-        return view('user.lihatuser', compact('data', 'dokumens', 'discusses'));
+        $logs = Log::where('id_pengajuan', $id)->get();
+
+
+        return view('user.lihatuser', compact('data', 'dokumens', 'discusses','logs'));
     }
 
     //...
@@ -79,6 +85,8 @@ class user_pageController extends Controller
         //     'nama_file' => 'required',
         // ]);
 
+        $user = admin::find($request->session()->get('user_id'));
+
         //Menyimpan data pengajuan
         $pengajuan = pengajuan::create([
             'tentang' => $request->tentang,
@@ -88,6 +96,12 @@ class user_pageController extends Controller
             'id_user' => $request->session()->get('user_id'),
             'obj_pembayaran' => $request->obj_pembayaran,
             'deskripsi' => $request->deskripsi,
+        ]);
+        
+
+        Log::create([
+            'id_pengajuan' => $pengajuan->id_pengajuan,
+            'isi_log' => 'Pengajuan dibuat oleh ' . $user->username,
         ]);
 
         $files = $request->file('nama_file');
@@ -135,6 +149,12 @@ class user_pageController extends Controller
             'id_kategori' => $request->id_kategori,
             'obj_pembayaran' => $request->obj_pembayaran,
             'deskripsi' => $request->deskripsi,
+        ]);
+        $user = admin::find($request->session()->get('user_id'));
+
+        Log::create([
+            'id_pengajuan' => $pengajuan->id_pengajuan,
+            'isi_log' => 'Pengajuan diperbarui oleh ' . $user->username,
         ]);
 
         // Only process documents if there are new ones provided

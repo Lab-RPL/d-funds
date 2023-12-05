@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pengajuan;
+use App\Models\log;
+use App\Models\admin;
 use App\Models\discuss;
 use App\Models\dokumen;
+use App\Models\pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,9 +48,10 @@ class kourController extends Controller
             ->where('discuss.id_pengajuan', $id)
             ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
+            $logs = Log::where('id_pengajuan', $id)->get();
 
 
-        return view('kour.lihatkour', compact('data', 'dokumens', 'discusses'));
+        return view('kour.lihatkour', compact('data', 'dokumens', 'discusses','logs'));
     }
 
     public function storeDiscuss(Request $request)
@@ -152,7 +155,17 @@ class kourController extends Controller
         if ($pengajuan) {
             $pengajuan->IsApproved = $approvalStatus;
             $pengajuan->save();
+            
+            $adminUser = admin::find($request->session()->get('user_id'));
 
+            // Add log entry
+            $logMessage = ($approvalStatus == 1) ? 'Pengajuan disetujui' : 'Pengajuan ditolak';
+            $logMessage .= ' oleh ' . $adminUser->username;
+    
+            Log::create([
+                'id_pengajuan' => $idPengajuan,
+                'isi_log' => $logMessage,
+            ]);
             return redirect()->back()->with('message', 'Status Perijinan Berhasil Diperbaharui');
         }
 
