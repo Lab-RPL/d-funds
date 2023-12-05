@@ -181,6 +181,7 @@
                                                         <th class="text-center" id="headr">Tanggal Pengajuan</th>
                                                         <th class="text-center" id="headr">Kategori</th>
                                                         <th class="text-center" id="headr">Unit Kerja</th>
+                                                        <th class="text-center" id="headr">Status</th>
                                                         <th class="text-center" id="headr">Opsi</th>
                                                     </tr>
                                                 </thead>
@@ -192,6 +193,7 @@
                                                                 <td>{{ $da->created_at }}</td>
                                                                 <td>{{ $da->nama_kategori }}</td>
                                                                 <td>{{ $da->unit_kerja }}</td>                                                               
+                                                                <td>belom tau</td>                                                               
                                                                 <td class="text-center">
                                                                     <a href="{{ route('pelaksana.discuss', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>

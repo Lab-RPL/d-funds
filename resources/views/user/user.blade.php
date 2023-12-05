@@ -192,6 +192,8 @@
                                                             Tentang</th>
                                                         <th class="text-center" id="headr">Kategori
                                                         </th>
+                                                        <th class="text-center" id="headr">Persetujuan
+                                                        </th>
                                                         <th class="text-center" id="headr">Status
                                                         </th>
                                                         <th class="text-center" id="headr">Opsi
@@ -215,6 +217,7 @@
                                                                         Disetujui
                                                                     @endif
                                                                 </td>
+                                                                <td></td>
                                                                 <td class="text-center">
                                                                     <a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>

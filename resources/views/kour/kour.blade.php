@@ -239,6 +239,7 @@
                                                         <th class="text-center" id="headr">Tanggal Pengajuan</th>
                                                         <th class="text-center" id="headr">Kategori</th>
                                                         <th class="text-center" id="headr">Unit Kerja</th>
+                                                        <th class="text-center" id="headr">Persetujuan</th>
                                                         <th class="text-center" id="headr">Status</th>
                                                         <th class="text-center" id="headr">Opsi</th>
                                                     </tr>
@@ -262,7 +263,7 @@
                                                                         Disetujui
                                                                     @endif
                                                                 </td>
-
+                                                                <td></td>
                                                                 <td class="text-center btn-group">
                                                                     <a href="{{ route('kour.discuss', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>
