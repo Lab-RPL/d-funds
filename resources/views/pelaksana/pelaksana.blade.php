@@ -58,6 +58,7 @@
                                         @php
                                             $countPengajuan = DB::table('pengajuan')
                                                 ->where('IsDelete', 0)
+                                                ->where('IsApproved', '=', '1')
                                                 ->count();
                                         @endphp
                                         <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>

@@ -188,7 +188,7 @@
                                                         <input class="form-check-input" type="radio"
                                                             name="approvalStatus" id="setujui" value="1" required>
                                                         <label class="form-check-label" for="setujui">
-                                                            Disetujui
+                                                            Setuju
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
@@ -196,7 +196,7 @@
                                                             name="approvalStatus" id="tidakSetujui" value="2"
                                                             required>
                                                         <label class="form-check-label" for="tidakSetujui">
-                                                            Tidak Disetujui
+                                                            Tidak Setuju
                                                         </label>
                                                     </div>
                                                 </div>
@@ -254,10 +254,9 @@
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
                                                                         <i class="fa-regular fa-clock text-primary"></i>
-                                                                        Menunggu Disetujui
+                                                                        Menunggu Persetujuan
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i> Sudah
-                                                                        Disetujui
+                                                                        <i class="fas fa-check text-success"></i>Disetujui
                                                                     @else
                                                                         <i class="fas fa-times text-danger"></i> Tidak
                                                                         Disetujui

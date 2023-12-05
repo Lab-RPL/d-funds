@@ -196,10 +196,9 @@
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
                                                                         <i class="fa-regular fa-clock text-primary"></i>
-                                                                        Menunggu Disetujui
+                                                                        Menunggu Persetujuan
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i> Sudah
-                                                                        Disetujui
+                                                                        <i class="fas fa-check text-success"></i>Disetujui
                                                                     @else
                                                                         <i class="fas fa-times text-danger"></i> Tidak
                                                                         Disetujui
