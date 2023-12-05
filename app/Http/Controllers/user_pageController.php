@@ -13,7 +13,7 @@ class user_pageController extends Controller
 {
     public function index(Request $req)
     {
-        if (!$req->session()->has('user_id')|| $req->session()->get('user_type') !== 'user') {
+        if (!$req->session()->has('user_id') || $req->session()->get('user_type') !== 'user') {
             return redirect('404');
         }
 
@@ -41,14 +41,13 @@ class user_pageController extends Controller
             ->where('id_pengajuan', $id)
             ->get();
 
-            $discusses = DB::table('discuss')
+        $discusses = DB::table('discuss')
             ->join('users', 'discuss.id_user', '=', 'users.id_user')
             ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
             ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc')
             ->where('discuss.id_pengajuan', $id)
             ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
-
 
         return view('user.lihatuser', compact('data', 'dokumens', 'discusses'));
     }
@@ -113,7 +112,7 @@ class user_pageController extends Controller
             $dokumen->save();
         }
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('pesan',"Data Berhasil Ditambahkan");
     }
 
     public function edit($id)
@@ -127,46 +126,65 @@ class user_pageController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $pengajuan = Pengajuan::find($id);
-    $pengajuan->update([
-        'tentang' => $request->tentang,
-        'unit_kerja' => $request->unit_kerja,
-        'catatan' => $request->catatan,
-        'id_kategori' => $request->id_kategori,
-        'obj_pembayaran' => $request->obj_pembayaran,
-        'deskripsi' => $request->deskripsi,
-    ]);
+    {
+        $pengajuan = Pengajuan::find($id);
+        $pengajuan->update([
+            'tentang' => $request->tentang,
+            'unit_kerja' => $request->unit_kerja,
+            'catatan' => $request->catatan,
+            'id_kategori' => $request->id_kategori,
+            'obj_pembayaran' => $request->obj_pembayaran,
+            'deskripsi' => $request->deskripsi,
+        ]);
 
-    // Only process documents if there are new ones provided
-    if ($request->has('nama_dokumen') || $request->hasFile('nama_file')) {
-        
-        $files = $request->file('nama_file');
-        $documents = $request->get('nama_dokumen');
+        // Only process documents if there are new ones provided
+        if ($request->has('nama_dokumen') || $request->hasFile('nama_file')) {
+            $files = $request->file('nama_file');
+            $documents = $request->get('nama_dokumen');
+            $documents = $request->get('nama_dokumens');
 
-        $fileCount = $files ? count($files) : 0;
+            $fileCount = $files ? count($files) : 0;
 
-        for ($i = 0; $i < $fileCount; $i++) {
-            $dokumen = new Dokumen();
-            $dokumen->id_pengajuan = $pengajuan->id_pengajuan;
-            $dokumen->nama_dokumen = isset($documents[$i]) ? $documents[$i] : null;
+            for ($i = 0; $i < $fileCount; $i++) {
+                $dokumen = new Dokumen();
+                $dokumen->id_pengajuan = $pengajuan->id_pengajuan;
+                $dokumen->nama_dokumen = isset($documents[$i]) ? $documents[$i] : null;
 
-            if (isset($files[$i])) {
-                $file = $files[$i];
-                $fileName = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
-                $file->storeAs('public/suratna', $fileName);
-                $dokumen->nama_file = $fileName;
-            } else {
-                $dokumen->nama_file = null; //example default value
+                if (isset($files[$i])) {
+                    $file = $files[$i];
+                    $fileName = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
+                    $file->storeAs('public/suratna', $fileName);
+                    $dokumen->nama_file = $fileName;
+                } else {
+                    $dokumen->nama_file = null; //example default value
+                }
+
+                $dokumen->save();
+            }
+        }
+        return redirect()->route('user.index')->with('pesan',"Data Berhasil Di Perbarui");
+    }
+
+    // Add this method to your controller
+    public function deleteDocument($id_dokumen)
+    {
+        try {
+            $dokumen = Dokumen::findOrFail($id_dokumen);
+            $path = storage_path('app/public/suratna/' . $dokumen->nama_file);
+
+            // Delete the document from the database
+            $dokumen->delete();
+
+            // Delete the file from storage
+            if (file_exists($path)) {
+                unlink($path);
             }
 
-            $dokumen->save();
+            return response()->json(['success' => true]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['error' => 'Document not found.']);
         }
     }
-    return redirect()->route('user.index');
-}
-
-    
 
     public function storeDiscuss(Request $request)
     {
@@ -236,10 +254,18 @@ class user_pageController extends Controller
     public function download($id_dokumen)
     {
         try {
-            $surat = dokumen::findOrFail($id_dokumen);
+            $surat = Dokumen::findOrFail($id_dokumen);
             $path = storage_path('app/public/suratna/' . $surat->nama_file);
 
-            return response()->download($path);
+            // Get the contents of the PDF file
+            $fileContent = file_get_contents($path);
+
+            // Set the Content-Type header to display the PDF in the browser
+            $headers = [
+                'Content-Type' => 'application/pdf',
+            ];
+
+            return response($fileContent, 200, $headers);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             // Handle the case where data with the given ID is not found.
             return redirect()

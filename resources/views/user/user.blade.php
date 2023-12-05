@@ -55,9 +55,9 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Total Pengajuan</span>
                                         @php
-                                        $countPengajuan = DB::table('pengajuan')
-                                            ->where('IsDelete',0)
-                                            ->count();
+                                            $countPengajuan = DB::table('pengajuan')
+                                                ->where('IsDelete', 0)
+                                                ->count();
                                         @endphp
                                         <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
                                     </div>
@@ -86,14 +86,14 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Pengajuan Dalam Proses</span>
                                         @php
-                                        $countProses = DB::table('pengajuan')
-                                            ->where('IsApproved', '=', '0')
-                                            ->where('IsDelete', '=', 0)
-                                            ->count();
-                                    @endphp
-                                    
-                                    <h3 class="card-title mb-2">{{ $countProses }}</h3>
-                                    
+                                            $countProses = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '0')
+                                                ->where('IsDelete', '=', 0)
+                                                ->count();
+                                        @endphp
+
+                                        <h3 class="card-title mb-2">{{ $countProses }}</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -120,11 +120,11 @@
                                         </div>
                                         <span class="d-block mb-4">Pengajuan Yang Sudah Disetujui</span>
                                         @php
-                                        $countSetuju = DB::table('pengajuan')
-                                            ->where('IsApproved','=','1')
-                                            ->where('IsDelete',0)
+                                            $countSetuju = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '1')
+                                                ->where('IsDelete', 0)
 
-                                            ->count();
+                                                ->count();
                                         @endphp
                                         <h3 class="card-title text-nowrap mb-2">{{ $countSetuju }}</h3>
                                     </div>
@@ -153,14 +153,14 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Pengajuan Tidak Disetujui</span>
                                         @php
-                                        $countNot = DB::table('pengajuan')
-                                            ->where('IsApproved', '=', '2')
-                                            ->where('IsDelete', '=', 0)
-                                            ->count();
-                                    @endphp
-                                    
-                                    <h3 class="card-title text-nowrap mb-2">{{ $countNot }}</h3>
-                                    
+                                            $countNot = DB::table('pengajuan')
+                                                ->where('IsApproved', '=', '2')
+                                                ->where('IsDelete', '=', 0)
+                                                ->count();
+                                        @endphp
+
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countNot }}</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -174,6 +174,16 @@
                                             @if (Session::has('message'))
                                                 <div id="pesan-sukses" class="alert alert-success mt-4">
                                                     {{ Session::get('message') }}</div>
+                                            @endif
+
+                                            @if (session('pesan'))
+                                                <script>
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Success',
+                                                        text: '{{ session('pesan') }}',
+                                                    });
+                                                </script>
                                             @endif
                                             <table id="tabelData" class="table table-bordered">
                                                 <thead>
@@ -196,12 +206,14 @@
                                                                 <td>{{ $da->nama_kategori }}</td>
                                                                 <td>
                                                                     @if ($da->IsApproved == 0)
-                                                                    <i class="fa-regular fa-clock text-primary"></i>
+                                                                        <i class="fa-regular fa-clock text-primary"></i>
                                                                         Menunggu Disetujui
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i> Sudah Disetujui
+                                                                        <i class="fas fa-check text-success"></i> Sudah
+                                                                        Disetujui
                                                                     @else
-                                                                        <i class="fas fa-times text-danger"></i> Tidak Disetujui
+                                                                        <i class="fas fa-times text-danger"></i> Tidak
+                                                                        Disetujui
                                                                     @endif
                                                                 </td>
                                                                 <td class="text-center">
@@ -211,8 +223,8 @@
                                                                     <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-warning">Edit</a>
 
-                                                                    <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}"
-                                                                        class="btn btn-danger">Hapus</a>
+                                                                    <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}" class="btn btn-danger delete-btn" data-confirm="Apakah Anda yakin ingin menghapus data ini?">Hapus</a>
+
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -235,6 +247,8 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $('#tabelData').DataTable({
             lengthMenu: [

@@ -1,6 +1,7 @@
 @extends('layouts.user-main')
 @section('content-user')
     <script src="https://kit.fontawesome.com/6d55e811a1.js" crossorigin="anonymous"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <div class="layout-wrapper layout-content-navbar">
@@ -15,8 +16,8 @@
 
                                         <div class="form-container">
                                             <h2>Form Pengajuan Draf</h2>
-                                            <form action="{{ route('user.update', $pengajuan->id_pengajuan) }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="{{ route('user.update', $pengajuan->id_pengajuan) }}"
+                                                method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-group">
@@ -26,7 +27,7 @@
                                                 <div class="form-group">
                                                     <label for="unit_kerja">Unit Kerja</label>
                                                     <input type="text" id="unit_kerja" name="unit_kerja"
-                                                        value={{ $pengajuan->unit_kerja }}>
+                                                        value="{{ $pengajuan->unit_kerja }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="catatan">Catatan</label>
@@ -132,27 +133,94 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($dokumens as $dokumen)
-                                                        <tr>
-                                                            <td><input type="text" class="file-name" name="nama_dokumen[]" value="{{ $dokumen->nama_dokumen }}" style="height: 35px;" required></td>
-                                                            <td>
-                                                                <input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" multiple value="">
-                                                                @if (!empty($dokumen->nama_file))
-                                                                    <p class="text-info">File sebelumnya: {{ $dokumen->nama_file }}</p>
-                                                                @endif
-                                                            </td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="text" class="file-name"
+                                                                        name="nama_dokumen[]"
+                                                                        value="{{ $dokumen->nama_dokumen }}"
+                                                                        style="height: 35px;" required disabled>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="file-input-container">
+                                                                        @if (empty($dokumen->nama_file))
+                                                                            <input type="file" class="file-input"
+                                                                                name="nama_file[]"
+                                                                                accept=".pdf, .doc, .jpeg, .jpg, .png"
+                                                                                required multiple value="">
+                                                                        @else
+                                                                            <p class="text-info">File sebelumnya:
+                                                                                {{ $dokumen->nama_file }}</p>
+                                                                            <input type="hidden" name="nama_file[]"
+                                                                                value="{{ $dokumen->nama_file }}">
+                                                                        @endif
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        onclick="deleteRow({{ $dokumen->id_dokumen }})">Delete</button>
+                                                                </td>
+                                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                                                                <script>
+                                                                    function deleteRow(idDokumen) {
+                                                                        // Get the CSRF token from the meta tag in your HTML
+                                                                        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                                                                        // Send an AJAX request to delete the document with the CSRF token included
+                                                                        $.ajax({
+                                                                            url: '/delete-document/' + idDokumen,
+                                                                            type: 'DELETE',
+                                                                            headers: {
+                                                                                'X-CSRF-TOKEN': csrfToken
+                                                                            },
+                                                                            success: function(response) {
+                                                                                // Remove the row from the table
+                                                                                $('#document-table tbody tr[data-id="' + idDokumen + '"]').remove();
+
+                                                                                // Use SweetAlert for a better-looking alert
+                                                                                Swal.fire({
+                                                                                    icon: 'success',
+                                                                                    title: 'Document deleted successfully!',
+                                                                                    showConfirmButton: false,
+                                                                                    timer: 1500 // Automatically close after 1.5 seconds
+                                                                                });
+
+                                                                                // Reload the page after a delay (adjust the delay as needed)
+                                                                                setTimeout(function() {
+                                                                                    location.reload();
+                                                                                }, 1500);
+                                                                            },
+                                                                            error: function(error) {
+                                                                                console.error('Error deleting document:', error);
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                </script>
+                                                            </tr>
                                                         @endforeach
-                                                        
-                                                    
+
+                                                        <!-- Baris untuk menambahkan baris baru -->
+                                                        {{-- <tr>
+                                                        <td>
+                                                            <input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required>
+                                                        </td>
+                                                        <td>
+                                                            <div class="file-input-container">
+                                                                <input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc, .jpeg, .jpg, .png" required multiple value="">
+                                                            </div>
+                                                        </td>
+                                                    </tr> --}}
+
                                                     </tbody>
                                                 </table>
+
                                                 <div class="form-group">
                                                     <a type="button" class="btn-plus"><i
                                                             class="fa-solid fa-circle-plus mt-2"
                                                             style="color: #2cc90d; font-size:35px;"></i></a>
-                                                    <a type="button" class="btn-minus"><i
+                                                    {{-- <a type="button" class="btn-minus"><i
                                                             class="fa-solid fa-circle-minus mt-2"
-                                                            style="color: #c90d0d; font-size:35px;"></i></a>
+                                                            style="color: #c90d0d; font-size:35px;"></i></a> --}}
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
@@ -173,8 +241,12 @@
             // Fungsi untuk menambahkan baris input
             function addRow() {
                 var newRow = '<tr>' +
-                    '<td><input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required></td>' +
-                    '<td><input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" required multiple></td>' +
+                    '<td><input type="text" class="file-name" name="nama_dokumens[]" style="height: 35px;" required></td>' +
+                    '<td>' +
+                    '<div class="file-input-container">' +
+                    '<input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc,.jpeg,.jpg,.png" required multiple>' +
+                    '</div>' +
+                    '</td>' +
                     '</tr>';
                 $('#document-table tbody').append(newRow);
             }
@@ -189,10 +261,6 @@
             // Event click untuk tombol plus dan minus
             $('.btn-plus').click(function() {
                 addRow();
-            });
-
-            $('.btn-minus').click(function() {
-                removeRow();
             });
         });
     </script>
