@@ -222,8 +222,14 @@
                                                                     <a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>
 
-                                                                    <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
-                                                                        class="btn btn-warning">Edit</a>
+                                                                        <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
+                                                                            class="btn btn-warning {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'disabled' : '' }}"
+                                                                            {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'aria-disabled=true' : '' }}
+                                                                            {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'tabindex=-1' : '' }}
+                                                                            role="button">
+                                                                            Edit
+                                                                         </a>
+                                                                         
 
                                                                     <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}" class="btn btn-danger delete-btn" data-confirm="Apakah Anda yakin ingin menghapus data ini?">Hapus</a>
 
