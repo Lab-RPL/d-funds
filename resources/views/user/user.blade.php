@@ -233,30 +233,48 @@
                                                                         <i class="fa-regular fa-clock text-primary"></i>
                                                                         Menunggu Persetujuan
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i>Disetujui
+                                                                        <i class="fas fa-check text-success"></i> Disetujui
                                                                     @else
                                                                         <i class="fas fa-times text-danger"></i> Tidak
                                                                         Disetujui
                                                                     @endif
                                                                 </td>
-                                                                <td></td>
+                                                                <td>
+                                                                    @if ($da->IsApproved == 0 || $da->IsApproved == 2)
+                                                                    <i class="text-center d-block">-</i>
+                                                                    @elseif ($da->IsApproved == 1)
+                                                                        @if ($da->status_pelaksana == 0)
+                                                                            <i class="fa-regular fa-hourglass-half text-primary"></i>
+                                                                            Belum Diproses
+                                                                        @elseif ($da->status_pelaksana == 1)
+                                                                            <i class="fas fa-clock text-warning"></i> Sedang Diproses
+                                                                        @elseif ($da->status_pelaksana == 2)
+                                                                            <i class="fas fa-clock text-warning"></i> Sudah Diajukan PUMK
+                                                                        @elseif ($da->status_pelaksana == 3)
+                                                                            <i class="fas fa-clock text-warning"></i> Proses Revisi
+                                                                        @else
+                                                                            <i class="fas fa-check text-success"></i> Sudah Terbayar
+                                                                        @endif
+                                                                    @endif
+                                                                </td>
                                                                 <td class="text-center">
                                                                     <a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}"
-                                                                        class="btn btn-primary">Diskusi</a>
+                                                                        class="btn btn-primary"><i
+                                                                            class="fas fa-comments"></i></a>
 
                                                                     <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-warning {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'disabled' : '' }}"
                                                                         {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'aria-disabled=true' : '' }}
                                                                         {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'tabindex=-1' : '' }}
                                                                         role="button">
-                                                                        Edit
+                                                                        <i class="fas fa-pencil-alt"></i>
                                                                     </a>
-
 
                                                                     <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-danger delete-btn"
-                                                                        data-confirm="Apakah Anda yakin ingin menghapus data ini?">Hapus</a>
-
+                                                                        data-confirm="Apakah Anda yakin ingin menghapus data ini?">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         @endif

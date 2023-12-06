@@ -14,18 +14,25 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
+                                            @php
+                                                // Menggunakan helper session() untuk mengambil data dari sesi
+                                                $userId = session('user_id');
+
+                                                // Mendapatkan username berdasarkan user_id
+                                                $user = \App\Models\admin::find($userId);
+                                                $userName = $user ? $user->username : null;
+                                            @endphp
+
                                             <div class="flex-grow-1">
-                                                @php
-                                                    $adminUser = \App\Models\User::where('user_type', 'pejabat')->first();
-                                                @endphp
                                                 <h2 class="card-title">
-                                                    @if ($adminUser)
-                                                        Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                    @if ($userName)
+                                                        Selamat Datang, {{ $userName }} di DFUNDS
                                                     @else
                                                         Selamat Datang di DFUNDS
                                                     @endif
                                                 </h2>
                                             </div>
+
                                             <img src="../assets/img/illustrations/man-with-laptop-light.png"
                                                 alt="Welcome Image" width="160">
                                         </div>
@@ -199,17 +206,35 @@
                                                                         <i class="fa-regular fa-clock text-primary"></i>
                                                                         Menunggu Persetujuan
                                                                     @elseif($da->IsApproved == 1)
-                                                                        <i class="fas fa-check text-success"></i>Disetujui
+                                                                        <i class="fas fa-check text-success"></i> Disetujui
                                                                     @else
                                                                         <i class="fas fa-times text-danger"></i> Tidak
                                                                         Disetujui
                                                                     @endif
                                                                 </td>
-                                                                <td></td>
+                                                                <td>
+                                                                    @if ($da->IsApproved == 0 || $da->IsApproved == 2)
+                                                                    <i class="text-center d-block">-</i>
+                                                                    @elseif ($da->IsApproved == 1)
+                                                                        @if ($da->status_pelaksana == 0)
+                                                                            <i class="fa-regular fa-hourglass-half text-primary"></i>
+                                                                            Belum Diproses
+                                                                        @elseif ($da->status_pelaksana == 1)
+                                                                            <i class="fas fa-clock text-warning"></i> Sedang Diproses
+                                                                        @elseif ($da->status_pelaksana == 2)
+                                                                            <i class="fas fa-clock text-warning"></i> Sudah Diajukan PUMK
+                                                                        @elseif ($da->status_pelaksana == 3)
+                                                                            <i class="fas fa-clock text-warning"></i> Proses Revisi
+                                                                        @else
+                                                                            <i class="fas fa-check text-success"></i> Sudah Terbayar
+                                                                        @endif
+                                                                    @endif
+                                                                </td>
 
                                                                 <td class="text-center">
                                                                     <a href="{{ route('pejabat.discuss', ['id' => $da->id_pengajuan]) }}"
-                                                                        class="btn btn-primary">Diskusi</a>
+                                                                        class="btn btn-primary"><i
+                                                                            class="fas fa-comments"></i></a>
                                                                 </td>
                                                         @endif
                                                         </tr>

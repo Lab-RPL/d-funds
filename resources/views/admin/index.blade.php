@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -18,7 +19,7 @@
                                                     $adminUser = \App\Models\User::where('user_type', 'admin')->first();
                                                 @endphp
                                                 <h2 class="card-title">
-                                                    @if($adminUser)
+                                                    @if ($adminUser)
                                                         Selamat Datang, {{ $adminUser->username }} di DFUNDS
                                                     @else
                                                         Selamat Datang di DFUNDS
@@ -54,11 +55,11 @@
                                             </div> --}}
                                         </div>
                                         @php
-                                        $countPejabat = DB::table('users')
-                                            ->where('user_type', 'pejabat')
-                                            ->where('IsDelete',0)
+                                            $countPejabat = DB::table('users')
+                                                ->where('user_type', 'pejabat')
+                                                ->where('IsDelete', 0)
 
-                                            ->count();
+                                                ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">Pejabat</span>
                                         <h3 class="card-title mb-2">{{ $countPejabat }}</h3>
@@ -87,10 +88,10 @@
                                             </div> --}}
                                         </div>
                                         @php
-                                        $countUser = DB::table('users')
-                                            ->where('user_type', 'user')
-                                            ->where('IsDelete',0)
-                                            ->count();
+                                            $countUser = DB::table('users')
+                                                ->where('user_type', 'user')
+                                                ->where('IsDelete', 0)
+                                                ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">User</span>
                                         <h3 class="card-title mb-2">{{ $countUser }}</h3>
@@ -119,13 +120,13 @@
                                             </div> --}}
                                         </div>
                                         @php
-                                        $countKour = DB::table('users')
-                                          ->where('user_type', 'kour')
-                                          ->where('IsDelete', 0)
-                                          ->count();
-                                      @endphp
-                                      <span class="d-block mb-1">Kour</span>
-                                      <h3 class="card-title text-nowrap mb-2">{{ $countKour }}</h3>
+                                            $countKour = DB::table('users')
+                                                ->where('user_type', 'kour')
+                                                ->where('IsDelete', 0)
+                                                ->count();
+                                        @endphp
+                                        <span class="d-block mb-1">Kour</span>
+                                        <h3 class="card-title text-nowrap mb-2">{{ $countKour }}</h3>
 
                                     </div>
                                 </div>
@@ -152,10 +153,10 @@
                                             </div> --}}
                                         </div>
                                         @php
-                                        $countPelaksana = DB::table('users')
-                                            ->where('user_type', 'pelaksana')
-                                            ->where('IsDelete',0)
-                                            ->count();
+                                            $countPelaksana = DB::table('users')
+                                                ->where('user_type', 'pelaksana')
+                                                ->where('IsDelete', 0)
+                                                ->count();
                                         @endphp
                                         <span class="fw-medium d-block mb-1">Pelaksana</span>
                                         <h3 class="card-title mb-2">{{ $countPelaksana }}</h3>
@@ -196,8 +197,10 @@
                                                             <div class="mb-3">
                                                                 <label for="password" class="form-label">Password</label>
                                                                 <div style="position:relative;">
-                                                                    <input id="password" type="password" class="form-control" name="password" required>
-                                                                    <i id="togglePassword" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</i>
+                                                                    <input id="password" type="password"
+                                                                        class="form-control" name="password" required>
+                                                                    <i id="togglePassword"
+                                                                        style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</i>
                                                                 </div>
                                                             </div>
 
@@ -206,7 +209,7 @@
                                                                 const togglePassword = document.querySelector('#togglePassword');
                                                                 const password = document.querySelector('#password');
 
-                                                                togglePassword.addEventListener('click', function (e) {
+                                                                togglePassword.addEventListener('click', function(e) {
                                                                     // toggle the type attribute
                                                                     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                                                                     password.setAttribute('type', type);
@@ -314,19 +317,21 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($data as $user)
-                                                    <tr>
-                                                        <td>{{ $user->username }}</td>
-                                                        <td>{{ $user->user_type }}</td>
-                                                        <td class="text-center">
-                                                            @if($user->user_type != 'admin')
-                                                                <a href="{{ Route('admin.edit',$user->id_user) }}" class="btn btn-warning">Edit</a>
-                                                                <a class="delete-btn btn btn-danger"
-                                                                   href="{{ route('admin.destroy', $user->id_user) }}">Hapus</a>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-
+                                                        <tr>
+                                                            <td>{{ $user->username }}</td>
+                                                            <td>{{ $user->user_type }}</td>
+                                                            <td class="text-center">
+                                                                @if ($user->user_type != 'admin')
+                                                                    <a href="{{ Route('admin.edit', $user->id_user) }}"
+                                                                        class="btn btn-warning"><i
+                                                                            class="fas fa-pencil-alt"></i></a>
+                                                                    <a class="delete-btn btn btn-danger"
+                                                                        href="{{ route('admin.destroy', $user->id_user) }}"><i
+                                                                            class="fas fa-trash"></i></a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
 

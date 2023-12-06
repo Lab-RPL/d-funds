@@ -157,7 +157,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <button type="button" class="btn btn-danger"
-                                                                        onclick="deleteRow({{ $dokumen->id_dokumen }})">Delete</button>
+                                                                        onclick="deleteRow({{ $dokumen->id_dokumen }})"><i
+                                                                            class="fa fa-trash"></i></button>
                                                                 </td>
                                                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -198,29 +199,12 @@
                                                                 </script>
                                                             </tr>
                                                         @endforeach
-
-                                                        <!-- Baris untuk menambahkan baris baru -->
-                                                        {{-- <tr>
-                                                        <td>
-                                                            <input type="text" class="file-name" name="nama_dokumen[]" style="height: 35px;" required>
-                                                        </td>
-                                                        <td>
-                                                            <div class="file-input-container">
-                                                                <input type="file" class="file-input" name="nama_file[]" accept=".pdf, .doc, .jpeg, .jpg, .png" required multiple value="">
-                                                            </div>
-                                                        </td>
-                                                    </tr> --}}
-
                                                     </tbody>
                                                 </table>
-
                                                 <div class="form-group">
                                                     <a type="button" class="btn-plus"><i
                                                             class="fa-solid fa-circle-plus mt-2"
                                                             style="color: #2cc90d; font-size:35px;"></i></a>
-                                                    {{-- <a type="button" class="btn-minus"><i
-                                                            class="fa-solid fa-circle-minus mt-2"
-                                                            style="color: #c90d0d; font-size:35px;"></i></a> --}}
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
