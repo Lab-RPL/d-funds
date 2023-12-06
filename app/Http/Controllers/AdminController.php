@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin;
+use App\Models\log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,8 +42,14 @@ public function store(Request $request)
 
     $user->save();
 
+    $logUser = admin::find($request->session()->get('user_id'));
+    Log::create([
+        'isi_log' => 'User ' . $user->username . ' berhasil dibuat oleh ' . $logUser->username,
+    ]);
+
     return redirect()->back()->with('message', 'Data Berhasil Ditambahkan');
 }
+
 
 public function edit($id)
 {
@@ -54,14 +61,24 @@ public function update(Request $request, $id)
 {
     $user = admin::findOrFail($id);
 
+    // Keep the original username before updating
+    $originalUsername = $user->username;
+
     $user->username = $request->get('username');
     $user->password = bcrypt($request->get('password'));  // encrypt the password before saving it
     $user->user_type = $request->get('user_type');
 
     $user->save();
 
+    // Create a log entry for the user update
+    $logUser = admin::find($request->session()->get('user_id'));
+    Log::create([
+        'isi_log' => 'User ' . $originalUsername . ' berhasil diperbarui oleh ' . $logUser->username,
+    ]);
+
     return redirect()->route('admin.index')->with('message', 'User Berhasil Di Update');
 }
+
 
 
 
@@ -97,16 +114,31 @@ public function update(Request $request, $id)
 // }
 
 
-public function destroy($id){
+public function destroy($id)
+{
     $admin_entry = admin::where('id_user', $id)->first();
+
+    if (!$admin_entry) {
+        return redirect()
+            ->back()
+            ->with('error', 'User not found');
+    }
+
+    // Soft delete the user entry
     $admin_entry->IsDelete = 1;
     $admin_entry->save();
+
+    // Create a log entry for the user deletion
+    $logUser = admin::find(session('user_id'));
+    Log::create([
+        'isi_log' => 'User ' . $admin_entry->username . ' berhasil dihapus oleh ' . $logUser->username,
+    ]);
 
     return redirect()
         ->back()
         ->with('message', 'Data User Berhasil Dihapus');
-
 }
+
 
 
 }

@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('log', function (Blueprint $table) {
             $table->bigIncrements('id_log');
             $table->unsignedBigInteger('id_pengajuan')->nullable();
-            $table->unsignedBigInteger('id_user')->nullable();
             $table->text('isi_log');
             $table->timestamps();
 
             $table->foreign('id_pengajuan')->references('id_pengajuan')->on('pengajuan');
-            $table->foreign('id_user')->references('id_user')->on('users');
         });
     }
 
