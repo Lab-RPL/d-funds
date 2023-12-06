@@ -187,24 +187,34 @@ class user_pageController extends Controller
 
     // Add this method to your controller
     public function deleteDocument($id_dokumen)
-    {
-        try {
-            $dokumen = Dokumen::findOrFail($id_dokumen);
-            $path = storage_path('app/public/suratna/' . $dokumen->nama_file);
+{
+    try {
+        $dokumen = Dokumen::findOrFail($id_dokumen);
+        $path = storage_path('app/public/suratna/' . $dokumen->nama_file);
 
-            // Delete the document from the database
-            $dokumen->delete();
+        // Get the admin user who is deleting the document
+        $user = admin::find(session('user_id'));
 
-            // Delete the file from storage
-            if (file_exists($path)) {
-                unlink($path);
-            }
+        // Delete the document from the database
+        $dokumen->delete();
 
-            return response()->json(['success' => true]);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['error' => 'Document not found.']);
+        // Delete the file from storage
+        if (file_exists($path)) {
+            unlink($path);
         }
+
+        // Create a log entry
+        Log::create([
+            'id_pengajuan' => $dokumen->id_pengajuan,
+            'isi_log' => 'Dokumen pengajuan telah dihapus oleh ' . $user->username,
+        ]);
+
+        return response()->json(['success' => true]);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        return response()->json(['error' => 'Document not found.']);
     }
+}
+
 
     public function storeDiscuss(Request $request)
     {
@@ -250,26 +260,36 @@ class user_pageController extends Controller
     }
 
     public function destroy($id)
-    {
-        // Find the pengajuan
-        $pengajuan = pengajuan::find($id);
+{
+    // Find the pengajuan
+    $pengajuan = pengajuan::find($id);
 
-        // If we didn't find a valid pengajuan, then redirect (or error, etc.)
-        if (!$pengajuan) {
-            return redirect()
-                ->back()
-                ->with('error', 'Invalid pengajuan ID');
-        }
-
-        // We found the pengajuan, so 'delete' it and then redirect (or whatever you want to do)
-        $pengajuan->IsDelete = 1;
-        $pengajuan->save();
-
-        // Redirect (or whatever you'd like to do after 'deleting' the pengajuan)
+    // If we didn't find a valid pengajuan, then redirect (or error, etc.)
+    if (!$pengajuan) {
         return redirect()
             ->back()
-            ->with('success', 'Pengajuan deleted successfully');
+            ->with('error', 'Invalid pengajuan ID');
     }
+
+    // We found the pengajuan, so 'delete' it and then redirect (or whatever you want to do)
+    $pengajuan->IsDelete = 1;
+    $pengajuan->save();
+
+    // Get the admin user who is performing the update
+    $user = admin::find(session('user_id'));
+
+    // Create a log entry
+    Log::create([
+        'id_pengajuan' => $pengajuan->id_pengajuan,
+        'isi_log' => 'Pengajuan Telah Dihapus oleh ' . $user->username,
+    ]);
+
+    // Redirect (or whatever you'd like to do after 'deleting' the pengajuan)
+    return redirect()
+        ->back()
+        ->with('success', 'Pengajuan deleted successfully');
+}
+
 
     public function download($id_dokumen)
     {
