@@ -19,11 +19,14 @@ class user_pageController extends Controller
         if (!$req->session()->has('user_id') || $req->session()->get('user_type') !== 'user') {
             return redirect('404');
         }
+        $user_id = $req->session()->get('user_id');
 
         $data = DB::table('pengajuan')
             ->join('kategori', 'pengajuan.id_kategori', '=', 'kategori.id_kategori')
             ->select('pengajuan.*', 'pengajuan.tentang', 'kategori.nama_kategori')
             ->where('pengajuan.IsDelete', 0)
+            ->where('pengajuan.id_user', $user_id) // Tambahkan kondisi where untuk user_id
+
             ->paginate(10000000);
 
         return view('user.user', compact('data'));

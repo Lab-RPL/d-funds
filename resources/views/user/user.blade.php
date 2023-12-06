@@ -14,18 +14,25 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
+                                            @php
+                                                // Menggunakan helper session() untuk mengambil data dari sesi
+                                                $userId = session('user_id');
+
+                                                // Mendapatkan username berdasarkan user_id
+                                                $user = \App\Models\admin::find($userId);
+                                                $userName = $user ? $user->username : null;
+                                            @endphp
+
                                             <div class="flex-grow-1">
-                                                @php
-                                                    $adminUser = \App\Models\User::where('user_type', 'user')->first();
-                                                @endphp
                                                 <h2 class="card-title">
-                                                    @if ($adminUser)
-                                                        Selamat Datang, {{ $adminUser->username }} di DFUNDS
+                                                    @if ($userName)
+                                                        Selamat Datang, {{ $userName }} di DFUNDS
                                                     @else
                                                         Selamat Datang di DFUNDS
                                                     @endif
                                                 </h2>
                                             </div>
+
                                             <img src="../assets/img/illustrations/man-with-laptop-light.png"
                                                 alt="Welcome Image" width="160">
                                         </div>
@@ -55,10 +62,14 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Total Pengajuan</span>
                                         @php
+                                            $user_id = session('user_id');
+
                                             $countPengajuan = DB::table('pengajuan')
                                                 ->where('IsDelete', 0)
+                                                ->where('id_user', $user_id)
                                                 ->count();
                                         @endphp
+
                                         <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
                                     </div>
                                 </div>
@@ -86,9 +97,13 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Pengajuan Dalam Proses</span>
                                         @php
+                                            $user_id = session('user_id');
+
                                             $countProses = DB::table('pengajuan')
                                                 ->where('IsApproved', '=', '0')
                                                 ->where('IsDelete', '=', 0)
+                                                ->where('id_user', $user_id)
+
                                                 ->count();
                                         @endphp
 
@@ -120,9 +135,12 @@
                                         </div>
                                         <span class="d-block mb-4">Pengajuan Yang Sudah Disetujui</span>
                                         @php
+                                            $user_id = session('user_id');
+
                                             $countSetuju = DB::table('pengajuan')
                                                 ->where('IsApproved', '=', '1')
                                                 ->where('IsDelete', 0)
+                                                ->where('id_user', $user_id)
 
                                                 ->count();
                                         @endphp
@@ -153,9 +171,13 @@
                                         </div>
                                         <span class="fw-medium d-block mb-4">Pengajuan Tidak Disetujui</span>
                                         @php
+                                            $user_id = session('user_id');
+
                                             $countNot = DB::table('pengajuan')
                                                 ->where('IsApproved', '=', '2')
                                                 ->where('IsDelete', '=', 0)
+                                                ->where('id_user', $user_id)
+
                                                 ->count();
                                         @endphp
 
@@ -222,16 +244,18 @@
                                                                     <a href="{{ route('user.detail', ['id' => $da->id_pengajuan]) }}"
                                                                         class="btn btn-primary">Diskusi</a>
 
-                                                                        <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
-                                                                            class="btn btn-warning {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'disabled' : '' }}"
-                                                                            {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'aria-disabled=true' : '' }}
-                                                                            {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'tabindex=-1' : '' }}
-                                                                            role="button">
-                                                                            Edit
-                                                                         </a>
-                                                                         
+                                                                    <a href="{{ route('user.edit', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-warning {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'disabled' : '' }}"
+                                                                        {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'aria-disabled=true' : '' }}
+                                                                        {{ $da->IsApproved == 1 || $da->IsApproved == 2 ? 'tabindex=-1' : '' }}
+                                                                        role="button">
+                                                                        Edit
+                                                                    </a>
 
-                                                                    <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}" class="btn btn-danger delete-btn" data-confirm="Apakah Anda yakin ingin menghapus data ini?">Hapus</a>
+
+                                                                    <a href="{{ route('user.destroy', ['id' => $da->id_pengajuan]) }}"
+                                                                        class="btn btn-danger delete-btn"
+                                                                        data-confirm="Apakah Anda yakin ingin menghapus data ini?">Hapus</a>
 
                                                                 </td>
                                                             </tr>
