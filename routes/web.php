@@ -55,6 +55,7 @@ Route::get('/pelaksana', [pelaksanaController::class, 'index'])->name('pelaksana
 Route::get('/pelaksana-discuss/{id}', [pelaksanaController::class, 'discussion'])->name('pelaksana.discuss');
 Route::post('/pelaksana-discuss-store', [pelaksanaController::class, 'storeDiscuss'])->name('pelaksana.store_discuss');
 Route::get('/pelaksana-discuss/{id}/download', [pelaksanaController::class, 'download'])->name('pelaksana.download');
+Route::post('/pelaksana-action', [pelaksanaController::class, 'pelaksanaAction'])->name('pelaksana.action');
 
 // User
 Route::get('/user',[user_pageController::class, 'index'])->name('user.index');

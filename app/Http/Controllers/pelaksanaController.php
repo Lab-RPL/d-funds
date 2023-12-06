@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
 use App\Models\discuss;
 use App\Models\dokumen;
 use App\Models\log;
+use App\Models\pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -113,5 +115,42 @@ class pelaksanaController extends Controller
                 ->back()
                 ->with('error', 'Surat not found.');
         }
+    }
+
+    public function pelaksanaAction(Request $request)
+    {
+        $validatedData = $request->validate([
+            'statusPelaksana' => 'required|in:1,2,3,4', // Assuming the approval status can only be 1 or 2
+            'id_pengajuan' => 'required|exists:pengajuan,id_pengajuan', // Validate that the id_pengajuan exists in the Pengajuan table
+        ]);
+
+        $statusPelaksana = $validatedData['statusPelaksana'];
+        $idPengajuan = $validatedData['id_pengajuan'];
+
+        // Update the Pengajuan record based on the approval status
+        $pengajuan = pengajuan::find($idPengajuan);
+        if ($pengajuan) {
+            $pengajuan->status_pelaksana = $statusPelaksana;
+            $pengajuan->save();
+            
+            $adminUser = admin::find($request->session()->get('user_id'));
+
+            // Add log entry
+            $statusText = [
+                1 => 'Sedang diproses',
+                2 => 'Sudah diajukan PUMK',
+                3 => 'Proses Revisi',
+                4 => 'Sudah terbayar',
+            ];
+            
+            $logMessage = 'Status pengajuan diubah menjadi "' . $statusText[$statusPelaksana] . '" oleh ' . $adminUser->username;
+            Log::create([
+                'id_pengajuan' => $idPengajuan,
+                'isi_log' => $logMessage,
+            ]);
+            return redirect()->back()->with('message', 'Status Pengajuan Berhasil Diperbaharui');
+        }
+
+        return redirect()->back()->with('error', 'Pengajuan tidak ditemukan.');
     }
 }
