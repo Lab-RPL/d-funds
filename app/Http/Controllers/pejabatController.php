@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\dokumen;
+use App\Models\log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,8 +46,11 @@ class pejabatController extends Controller
             ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
 
+            $logs = Log::where('id_pengajuan', $id)->get();
 
-        return view('pejabat.lihatpejabat', compact('data', 'dokumens', 'discusses'));
+
+
+        return view('pejabat.lihatpejabat', compact('data', 'dokumens', 'discusses','logs'));
     }
 
     public function download($id_dokumen)

@@ -75,6 +75,38 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-12 col-md-12 mb-4">
+                                <div class="card">
+                                    <h5 class="card-header bg-primary text-white">Log Aktivitas</h5>
+                                    <div class="card-body">
+                                        <!-- Daftar komentar -->
+
+                                        <div class="mt-4">
+                                            <h6>History</h6>
+                                            <ul class="list-group">
+                                                @foreach ($logs->sortByDesc('created_at') as $log)
+                                                    <li class="list-group-item">
+                                                        {{ $log->isi_log }}
+                                                        <br>
+                                                        <small>
+                                                            {{ $log->created_at->translatedFormat('l, d F Y H:i:s') }}
+                                        
+                                                            @if ($log->created_at == $logs->last()->created_at)
+                                                                <span class="badge bg-primary">Latest</span>
+                                                            @endif
+                                                        </small>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        
+                                        
+
+
+                                    </div>
+                                </div>
+                            </div>  
+
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <h5 class="card-header bg-primary text-white">Diskusi</h5>

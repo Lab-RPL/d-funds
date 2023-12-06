@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\discuss;
 use App\Models\dokumen;
+use App\Models\log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,7 +49,10 @@ class pelaksanaController extends Controller
             ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
 
-        return view('pelaksana.lihatpelaksana', compact('data', 'dokumens', 'discusses'));
+            $logs = Log::where('id_pengajuan', $id)->get();
+
+
+        return view('pelaksana.lihatpelaksana', compact('data', 'dokumens', 'discusses','logs'));
     }
 
 
