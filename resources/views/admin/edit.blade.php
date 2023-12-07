@@ -57,10 +57,12 @@
                                     </div>
 
                                     <div class="row justify-content-end">
-                                      <div class="col-sm-10">
+                                      <div class="col-sm-10 d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ route('admin.index') }}" class="btn btn-primary ml-2" target="_self">Kembali</a>
                                       </div>
                                     </div>
+                                    
 
                                   </form>
                                 </div>
