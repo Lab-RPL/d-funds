@@ -206,7 +206,10 @@
                                                             class="fa-solid fa-circle-plus mt-2"
                                                             style="color: #2cc90d; font-size:35px;"></i></a>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <div class="d-flex justify-content-between">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <a href="{{ route('user.index') }}" class="btn btn-primary" target="_self">Kembali</a>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
