@@ -43,7 +43,7 @@ class pejabatController extends Controller
             ->leftJoin('dokumen', 'discuss.id_disc', '=', 'dokumen.id_disc')
             ->select('discuss.*', 'users.username', 'dokumen.nama_file', 'dokumen.id_disc')
             ->where('discuss.id_pengajuan', $id)
-            ->orderBy('discuss.created_at', 'desc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
+            ->orderBy('discuss.created_at', 'asc') // Tambahkan ini untuk mengurutkan berdasarkan tanggal
             ->get();
 
             $logs = Log::where('id_pengajuan', $id)->get();
