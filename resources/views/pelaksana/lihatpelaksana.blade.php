@@ -148,8 +148,8 @@
                                                 <input type="file" class="form-control" id="uploadFile" name="file[]">
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <button type="submit" class="btn btn-primary">Kirim</button>
                                                 <a href="{{ route('pelaksana.index') }}" class="btn btn-primary" target="_self">Kembali</a>
+                                                <button type="submit" class="btn btn-danger">Kirim</button>
                                             </div>
                                         </form>
                                     </div>
