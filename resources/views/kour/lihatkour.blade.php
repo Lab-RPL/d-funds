@@ -145,8 +145,8 @@
                                             </div>
 
                                             <div class="d-flex justify-content-between">
+                                                <a href="{{ route('kour.index') }}" class="btn btn-danger" target="_self">Kembali</a>
                                                 <button type="submit" class="btn btn-primary">Kirim</button>
-                                                <a href="{{ route('kour.index') }}" class="btn btn-primary" target="_self">Kembali</a>
                                             </div>
                                         </form>
 

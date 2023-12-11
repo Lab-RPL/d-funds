@@ -145,7 +145,7 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <a href="/pejabat"><button type="submit" class="btn btn-primary mt-3">Kembali</button></a>
+                                            <a href="/pejabat"><button type="submit" class="btn btn-danger mt-3">Kembali</button></a>
                                         </div>
                                         
                                         
