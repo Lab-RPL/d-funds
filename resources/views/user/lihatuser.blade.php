@@ -150,9 +150,9 @@
                                             </div>
 
                                             <div class="d-flex justify-content-between">
-                                                <button type="submit" class="btn btn-primary">Kirim</button>
-                                                <a href="{{ route('user.index') }}" class="btn btn-primary"
+                                                <a href="{{ route('user.index') }}" class="btn btn-danger"
                                                     target="_self">Kembali</a>
+                                                <button type="submit" class="btn btn-primary">Kirim</button>
                                             </div>
                                         </form>
                                     </div>
