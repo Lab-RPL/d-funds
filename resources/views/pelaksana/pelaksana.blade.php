@@ -41,7 +41,7 @@
                             </div>
 
                             <!-- Card pertama - Profit -->
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-3 col-md-3">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -60,14 +60,134 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <span class="fw-medium d-block mb-4">Total Pengajuan Yang Sudah Disetujui</span>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Belum Diproses</span>
                                         @php
-                                            $countPengajuan = DB::table('pengajuan')
-                                                ->where('IsDelete', 0)
-                                                ->where('IsApproved', '=', '1')
-                                                ->count();
-                                        @endphp
-                                        <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
+                                        $countPengajuan = DB::table('pengajuan')
+                                            ->where('IsDelete', 0)
+                                            ->where('status_pelaksana', '=', '0')
+                                            ->count();
+                                    @endphp
+                                    <h3 class="card-title mb-2">{{ $countPengajuan }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/cc-primary.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Pengajuan Sedang Diproses</span>
+                                        @php
+                                        $countProses = DB::table('pengajuan')
+                                            ->where('IsDelete', 0)
+                                            ->where('status_pelaksana', '=', '1')
+                                            ->count();
+                                    @endphp
+                                    <h3 class="card-title mb-2">{{ $countProses }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/paypal.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Sudah Diajukan PUMK</span>
+                                        @php
+                                        $countPumk = DB::table('pengajuan')
+                                            ->where('IsDelete', 0)
+                                            ->where('status_pelaksana', '=', '2')
+                                            ->count();
+                                    @endphp
+                                    <h3 class="card-title mb-2">{{ $countPumk }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/chart.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Proses Revisi</span>
+                                        @php
+                                        $countrev = DB::table('pengajuan')
+                                            ->where('IsDelete', 0)
+                                            ->where('status_pelaksana', '=', '3')
+                                            ->count();
+                                    @endphp
+                                    <h3 class="card-title mb-2">{{ $countrev }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="../assets/img/icons/unicons/tes-transformed.png" alt="chart success"
+                                                    class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Tambah</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-medium d-block mb-4">Sudah Terbayar</span>
+                                        @php
+                                        $countsudah = DB::table('pengajuan')
+                                            ->where('IsDelete', 0)
+                                            ->where('status_pelaksana', '=', '4')
+                                            ->count();
+                                    @endphp
+                                    <h3 class="card-title mb-2">{{ $countsudah }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +223,7 @@
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="statusPelaksana"
-                                                            id="revisi" value="2" required>
+                                                            id="revisi" value="3" required>
                                                         <label class="form-check-label" for="revisi">
                                                             Proses Revisi
                                                         </label>
