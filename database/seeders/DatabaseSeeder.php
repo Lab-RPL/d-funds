@@ -30,13 +30,13 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'id_user' => 2,
-            'username' => "dosen",
+            'username' => "pejabat",
             'password' => bcrypt(123),
             'user_type' => "pejabat"
         ]);
         User::create([
             'id_user' => 3,
-            'username' => "juan",
+            'username' => "dosen",
             'password' => bcrypt(123),
             'user_type' => "user"
         ]);
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'id_user' => 5,
-            'username' => "ronron",
+            'username' => "pelaksana",
             'password' => bcrypt(123),
             'user_type' => "pelaksana"
         ]);
